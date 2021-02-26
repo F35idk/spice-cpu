@@ -274,5 +274,10 @@ main(void)
          (const char *[]) { "in", "sel", NULL },
          (const char *[]) { "a", "b", NULL });
 
+    test("4waymux/4waymux.sp",
+         "4waymux/4WayMux.cmp",
+         (const char *[]) { "a", "b", "c", "d", "sel0", "sel1", NULL },
+         (const char *[]) { "out", NULL });
+
     return 0;
 }
