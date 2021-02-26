@@ -229,5 +229,15 @@ main(void)
          (const char *[]) { "va", "vb", "vc", NULL },
          (const char *[]) { "nsum", "ncarry", NULL });
 
+    test("8bitadder/8bitadder.sp",
+         "8bitadder/Add8.cmp",
+         (const char *[]) { "va7", "va6", "va5", "va4",
+                            "va3", "va2", "va1", "va0",
+                            "vb7", "vb6", "vb5", "vb4",
+                            "vb3", "vb2", "vb1", "vb0", NULL },
+         (const char *[]) { "nsum7", "nsum6", "nsum5",
+                            "nsum4", "nsum3", "nsum2",
+                            "nsum1", "nsum0", "ncarry", NULL });
+
     return 0;
 }
