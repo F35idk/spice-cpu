@@ -234,7 +234,20 @@ main(void)
     ngSpice_Init(ngspice_output_callback, NULL, ngspice_exit_callback,
                  NULL, NULL, NULL, NULL);
 
-    // TODO: ..
+    test("not/not.sp",
+         "not/Not.cmp",
+         (const char *[]) { "in", NULL },
+         (const char *[]) { "out", NULL });
+
+    test("nand/nand.sp",
+         "nand/Nand.cmp",
+         (const char *[]) { "a", "b", NULL },
+         (const char *[]) { "out", NULL });
+
+    test("nor/nor.sp",
+         "nor/Nor.cmp",
+         (const char *[]) { "a", "b", NULL },
+         (const char *[]) { "out", NULL });
 
     return 0;
 }
