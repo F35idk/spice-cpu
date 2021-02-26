@@ -249,5 +249,20 @@ main(void)
          (const char *[]) { "a", "b", NULL },
          (const char *[]) { "out", NULL });
 
+    test("and/and.sp",
+         "and/And.cmp",
+         (const char *[]) { "a", "b", NULL },
+         (const char *[]) { "out", NULL });
+
+    test("or/or.sp",
+         "or/Or.cmp",
+         (const char *[]) { "a", "b", NULL },
+         (const char *[]) { "out", NULL });
+
+    test("xor/xor.sp",
+         "xor/Xor.cmp",
+         (const char *[]) { "a", "b", NULL },
+         (const char *[]) { "out", NULL });
+
     return 0;
 }
