@@ -264,5 +264,15 @@ main(void)
          (const char *[]) { "a", "b", NULL },
          (const char *[]) { "out", NULL });
 
+    test("mux/mux.sp",
+         "mux/Mux.cmp",
+         (const char *[]) { "a", "b", "sel", NULL },
+         (const char *[]) { "out", NULL });
+
+    test("dmux/dmux.sp",
+         "dmux/DMux.cmp",
+         (const char *[]) { "in", "sel", NULL },
+         (const char *[]) { "a", "b", NULL });
+
     return 0;
 }
