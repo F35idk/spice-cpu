@@ -279,5 +279,15 @@ main(void)
          (const char *[]) { "a", "b", "c", "d", "sel0", "sel1", NULL },
          (const char *[]) { "out", NULL });
 
+    test("halfadder/halfadder.sp",
+         "halfadder/HalfAdder.cmp",
+         (const char *[]) { "a", "b", NULL },
+         (const char *[]) { "sum", "carry", NULL });
+
+    test("fulladder/fulladder.sp",
+         "fulladder/FullAdder.cmp",
+         (const char *[]) { "a", "b", "c", NULL },
+         (const char *[]) { "sum", "carry", NULL });
+
     return 0;
 }
