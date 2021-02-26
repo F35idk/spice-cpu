@@ -43,8 +43,9 @@ test(
     const char *netlist_path,
     // the path to the '.cmp' file
     const char *cmp_file_path,
-    // the labels of the SPICE nodes or voltage
-    // sources representing logic inputs/outputs
+    // the labels of the SPICE nodes/voltage sources
+    // representing logic inputs/outputs, in the
+    // order they appear in the cmp file
     const char *spice_input_labels[],
     const char *spice_output_labels[]
 )
@@ -62,14 +63,14 @@ test(
     cmp_file = mmap(NULL, cmp_file_len, PROT_READ, MAP_PRIVATE, cmp_fd, 0);
     cmp_file_pos = 0;
 
-    // skip first line of file (column headers)
+    // skip first line of file (column header)
     while (cmp_file[cmp_file_pos++] != '\n')
         continue;
 
     int cmd_len = 7 + strlen(netlist_path) + 1;
     char *source_cmd = calloc(sizeof(char), cmd_len);
     snprintf(source_cmd, cmd_len, "source %s", netlist_path);
-    // send source command
+    // send command to open netlist
     int error = ngSpice_Command(source_cmd);
     free(source_cmd);
 
@@ -209,12 +210,18 @@ main(void)
 
     test("4waymux/4waymux.sp",
          "4waymux/4WayMux.cmp",
-         (const char *[]) { "va", "vb", "vc", "vd", "vsel0", "vsel1", NULL },
+         (const char *[]) { "va", "vb", "vc", "vd",
+                            "vsel0", "vsel1", NULL },
          (const char *[]) { "nout", NULL });
 
     test("halfadder/halfadder.sp",
          "halfadder/HalfAdder.cmp",
          (const char *[]) { "va", "vb", NULL },
+         (const char *[]) { "nsum", "ncarry", NULL });
+
+    test("fulladder/fulladder.sp",
+         "fulladder/FullAdder.cmp",
+         (const char *[]) { "va", "vb", "vc", NULL },
          (const char *[]) { "nsum", "ncarry", NULL });
 
     test("fulladder/fulladder.sp",
