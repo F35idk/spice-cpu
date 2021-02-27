@@ -176,68 +176,63 @@ main(void)
     ngSpice_Init(ngspice_output_callback, NULL, ngspice_exit_callback,
                  NULL, NULL, NULL, NULL);
 
-    test("not/not.sp",
+    test("not/test.sp",
          "not/Not.cmp",
          (const char *[]) { "vin", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("nand/nand.sp",
+    test("nand/test.sp",
          "nand/Nand.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("nor/nor.sp",
+    test("nor/test.sp",
          "nor/Nor.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("and/and.sp",
+    test("and/test.sp",
          "and/And.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("or/or.sp",
+    test("or/test.sp",
          "or/Or.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("xor/xor.sp",
+    test("xor/test.sp",
          "xor/Xor.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("mux/mux.sp",
+    test("mux/test.sp",
          "mux/Mux.cmp",
          (const char *[]) { "va", "vb", "vsel", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("dmux/dmux.sp",
+    test("dmux/test.sp",
          "dmux/DMux.cmp",
          (const char *[]) { "vin", "vsel", NULL },
          (const char *[]) { "na", "nb", NULL });
 
-    test("4waymux/4waymux.sp",
+    test("4waymux/test.sp",
          "4waymux/4WayMux.cmp",
          (const char *[]) { "va", "vb", "vc", "vd",
                             "vsel0", "vsel1", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("halfadder/halfadder.sp",
+    test("halfadder/test.sp",
          "halfadder/HalfAdder.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nsum", "ncarry", NULL });
 
-    test("fulladder/fulladder.sp",
+    test("fulladder/test.sp",
          "fulladder/FullAdder.cmp",
          (const char *[]) { "va", "vb", "vc", NULL },
          (const char *[]) { "nsum", "ncarry", NULL });
 
-    test("fulladder/fulladder.sp",
-         "fulladder/FullAdder.cmp",
-         (const char *[]) { "va", "vb", "vc", NULL },
-         (const char *[]) { "nsum", "ncarry", NULL });
-
-    test("8bitadder/8bitadder.sp",
+    test("8bitadder/test.sp",
          "8bitadder/Add8.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4",
                             "va3", "va2", "va1", "va0",
