@@ -71,14 +71,10 @@ test(
     cmp_file = mmap(NULL, cmp_file_len, PROT_READ, MAP_PRIVATE, cmp_fd, 0);
     cmp_file_pos = 0;
 
-    // skip to first newline (ignore column header)
-    while ((cmp_file_pos + 1) < cmp_file_len && cmp_file[++cmp_file_pos] != '\n')
-        continue;
-
     int cmd_len = 7 + strlen(netlist_path) + 1;
     char *source_cmd = calloc(sizeof(char), cmd_len);
     snprintf(source_cmd, cmd_len, "source %s", netlist_path);
-    // send command to open netlist
+    // send command to open netlist file
     int error = ngSpice_Command(source_cmd);
     free(source_cmd);
 
@@ -86,6 +82,10 @@ test(
         printf("error when sending command: '%s'\n", source_cmd);
         exit(1);
     }
+
+    // skip to first newline (ignore column header)
+    while ((cmp_file_pos + 1) < cmp_file_len && cmp_file[++cmp_file_pos] != '\n')
+        continue;
 
     // simulate and test the logic inputs/outputs, row by row
     while (++cmp_file_pos < cmp_file_len) {
@@ -147,7 +147,7 @@ test(
                 printf("%s voltage: %fV\n", output_info->v_name, output_voltage);
 
                 // test that the output voltages from the simulation
-                // match the logic output given by the cmp file
+                // match the logic outputs in the cmp file
                 if (cmp_file[cmp_file_pos] == '0') {
                     // if logic output should be zero, assert that
                     // the output voltage is less than 1.0V
