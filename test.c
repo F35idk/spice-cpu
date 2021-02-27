@@ -63,8 +63,8 @@ test(
     cmp_file = mmap(NULL, cmp_file_len, PROT_READ, MAP_PRIVATE, cmp_fd, 0);
     cmp_file_pos = 0;
 
-    // skip first line of file (column header)
-    while (cmp_file[cmp_file_pos++] != '\n')
+    // skip to first newline (ignore column header)
+    while ((cmp_file_pos + 1) < cmp_file_len && cmp_file[++cmp_file_pos] != '\n')
         continue;
 
     int cmd_len = 7 + strlen(netlist_path) + 1;
