@@ -21,6 +21,8 @@ ngspice_exit_callback(
     return 0;
 }
 
+static const char *non_fatal_errors[2] = { "gmin", "redefinition" };
+
 static int
 ngspice_output_callback(
     char *output_str,
@@ -30,8 +32,14 @@ ngspice_output_callback(
 {
     if (strstr(output_str, "stderr")) {
         printf("ngspice error: '%s'\n", &output_str[7]);
-        if (!strstr(output_str, "gmin"))
-            exit(1); // consider the error fatal
+
+        // check if error is non-fatal
+        for (size_t i = 0; i < sizeof(non_fatal_errors) / sizeof(char *); i++) {
+            if (strstr(output_str, non_fatal_errors[i]))
+                return 0;
+        }
+
+        exit(1);
     }
 
     return 0;
