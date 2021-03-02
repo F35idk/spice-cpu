@@ -2,8 +2,8 @@
 
 .include ../fulladder/fulladder.inc
 
-.subckt 8bitadder a0 a1 a2 a3 a4 a5 a6 a7 b0 b1 b2 b3 b4 b5 b6 b7 carry sum1 sum2 sum3 sum4 sum5 sum6 sum7 sum0 vdd vss
-xx1 b0 a0 vss n001 sum0 vdd vss fulladder
+.subckt 8bitadder a0 a1 a2 a3 a4 a5 a6 a7 b0 b1 b2 b3 b4 b5 b6 b7 carry sum1 sum2 sum3 sum4 sum5 sum6 sum7 sum0 vdd vss c
+xx1 b0 a0 c n001 sum0 vdd vss fulladder
 xx2 b1 a1 n001 n002 sum1 vdd vss fulladder
 xx3 b2 a2 n002 n003 sum2 vdd vss fulladder
 xx4 b3 a3 n003 n004 sum3 vdd vss fulladder
