@@ -242,5 +242,15 @@ main(void)
                             "nsum4", "nsum3", "nsum2",
                             "nsum1", "nsum0", "ncarry", NULL });
 
+    test("8bitand/test.sp",
+         "8bitand/And8.cmp",
+         (const char *[]) { "va7", "va6", "va5", "va4",
+                            "va3", "va2", "va1", "va0",
+                            "vb7", "vb6", "vb5", "vb4",
+                            "vb3", "vb2", "vb1", "vb0", NULL },
+         (const char *[]) { "nout7", "nout6", "nout5",
+                            "nout4", "nout3", "nout2",
+                            "nout1", "nout0", NULL });
+
     return 0;
 }
