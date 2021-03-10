@@ -272,6 +272,13 @@ main(void)
                             "nout4", "nout3", "nout2",
                             "nout1", "nout0", NULL });
 
+    test("8wayor/test.sp",
+         "8wayor/Or8Way.cmp",
+         (const char *[]) { "vin0", "vin1", "vin2",
+                            "vin3", "vin4", "vin5",
+                            "vin6", "vin7", NULL },
+         (const char *[]) { "nout", NULL });
+
     test("alu/test.sp",
          "alu/ALU-nostat.cmp",
          (const char *[]) { "vx7", "vx6", "vx5", "vx4", "vx3",
