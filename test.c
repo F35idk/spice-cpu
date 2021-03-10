@@ -274,9 +274,16 @@ main(void)
 
     test("8wayor/test.sp",
          "8wayor/Or8Way.cmp",
-         (const char *[]) { "vin0", "vin1", "vin2",
-                            "vin3", "vin4", "vin5",
-                            "vin6", "vin7", NULL },
+         (const char *[]) { "vin7", "vin6", "vin5",
+                            "vin4", "vin3", "vin2",
+                            "vin1", "vin0", NULL },
+         (const char *[]) { "nout", NULL });
+
+    test("8waynor/test.sp",
+         "8waynor/Nor8Way.cmp",
+         (const char *[]) { "vin7", "vin6", "vin5",
+                            "vin4", "vin3", "vin2",
+                            "vin1", "vin0", NULL },
          (const char *[]) { "nout", NULL });
 
     test("alu/test.sp",
