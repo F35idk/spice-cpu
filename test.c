@@ -272,5 +272,16 @@ main(void)
                             "nout4", "nout3", "nout2",
                             "nout1", "nout0", NULL });
 
+    test("alu/test.sp",
+         "alu/ALU-nostat.cmp",
+         (const char *[]) { "vx7", "vx6", "vx5", "vx4", "vx3",
+                            "vx2", "vx1", "vx0", "vy7", "vy6",
+                            "vy5", "vy4", "vy3", "vy2", "vy1",
+                            "vy0", "vzx", "vnx", "vzy", "vny",
+                            "vf", "vnout", NULL },
+         (const char *[]) { "nout7", "nout6", "nout5",
+                            "nout4", "nout3", "nout2",
+                            "nout1", "nout0", NULL });
+
     return 0;
 }
