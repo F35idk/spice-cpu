@@ -21,8 +21,6 @@ ngspice_exit_callback(
     return 0;
 }
 
-static const char *non_fatal_errors[2] = { "gmin", "redefinition" };
-
 static int
 ngspice_output_callback(
     char *output_str,
@@ -31,15 +29,7 @@ ngspice_output_callback(
 )
 {
     if (strstr(output_str, "stderr")) {
-        printf("ngspice error: '%s'\n", &output_str[7]);
-
-        // check if error is non-fatal
-        for (size_t i = 0; i < sizeof(non_fatal_errors) / sizeof(char *); i++) {
-            if (strstr(output_str, non_fatal_errors[i]))
-                return 0;
-        }
-
-        exit(1);
+        fprintf(stderr, "ngspice error: '%s'\n", &output_str[7]);
     }
 
     return 0;
@@ -79,7 +69,7 @@ test(
     free(source_cmd);
 
     if (error) {
-        printf("error when sending command: '%s'\n", source_cmd);
+        printf("error when sending command: '%s'\n - check stderr", source_cmd);
         exit(1);
     }
 
@@ -106,7 +96,7 @@ test(
                 printf("setting %s = %cV\n", spice_input_labels[j], input_voltage);
 
                 if (error) {
-                    printf("error when sending command: '%s'\n", alter_cmd);
+                    printf("error when sending command: '%s'\n - check stderr", alter_cmd);
                     free(alter_cmd);
                     exit(1);
                 }
@@ -122,7 +112,7 @@ test(
         // simulate
         int error = ngSpice_Command("run");
         if (error) {
-            puts("error when sending command: 'run'");
+            puts("error when sending command: 'run' - check stderr");
             exit(1);
         }
 
@@ -138,7 +128,7 @@ test(
                 assert(output_info);
 
                 if (!output_info->v_length) {
-                    printf("error: output vector '%s' has length zero",
+                    printf("error: output vector '%s' has length zero - check stderr\n",
                            output_info->v_name);
                     exit(1);
                 }
