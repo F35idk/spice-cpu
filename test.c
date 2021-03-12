@@ -290,7 +290,7 @@ main(void)
          (const char *[]) { "nout", NULL });
 
     test("alu/test.sp",
-         "alu/ALU-nostat.cmp",
+         "alu/ALU.cmp",
          (const char *[]) { "vx7", "vx6", "vx5", "vx4", "vx3",
                             "vx2", "vx1", "vx0", "vy7", "vy6",
                             "vy5", "vy4", "vy3", "vy2", "vy1",
@@ -298,7 +298,9 @@ main(void)
                             "vf", "vnout", NULL },
          (const char *[]) { "nout7", "nout6", "nout5",
                             "nout4", "nout3", "nout2",
-                            "nout1", "nout0", NULL });
+                            // NOTE: 'nout7' (the 8th bit of the output)
+                            // is used as the ALU negative flag
+                            "nout1", "nout0", "nzr", "nout7", NULL });
 
     return 0;
 }
