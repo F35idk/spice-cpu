@@ -39,30 +39,24 @@ ngspice_output_callback(
 }
 
 static void
-test(
+init_test(
     // the path to the SPICE netlist
     const char *netlist_path,
     // the path to the '.cmp' file
     const char *cmp_file_path,
-    // the labels of the SPICE nodes/voltage sources
-    // representing logic inputs/outputs, in the
-    // order they appear in the cmp file
-    const char *spice_input_labels[],
-    const char *spice_output_labels[]
+    char **out_cmp_file,
+    int *out_cmp_file_len
 )
 {
     int cmp_fd;
-    int cmp_file_len;
-    int cmp_file_pos;
-    char *cmp_file;
 
     printf("simulating '%s'\n", netlist_path);
 
     // open the cmp file
     cmp_fd = open(cmp_file_path, O_RDONLY);
-    cmp_file_len = lseek(cmp_fd, 0, SEEK_END);
-    cmp_file = mmap(NULL, cmp_file_len, PROT_READ, MAP_PRIVATE, cmp_fd, 0);
-    cmp_file_pos = 0;
+    *out_cmp_file_len = lseek(cmp_fd, 0, SEEK_END);
+    *out_cmp_file = mmap(NULL, *out_cmp_file_len, PROT_READ, MAP_PRIVATE, cmp_fd, 0);
+    close(cmp_fd);
 
     int cmd_len = 7 + strlen(netlist_path) + 1;
     char *source_cmd = calloc(sizeof(char), cmd_len);
@@ -75,6 +69,100 @@ test(
         printf("error when sending command: '%s'\n - check stderr", source_cmd);
         exit(1);
     }
+}
+
+// sends a command to ngspice to alter 'device' with the given 'value'
+static void
+send_ngspice_alter_cmd(
+    const char *device_name,
+    const char value
+)
+{
+    int cmd_len = 10 + strlen(device_name) + 1;
+    char *alter_cmd = calloc(sizeof(char), cmd_len);
+
+    // format the 'alter' command to set the right device parameter and value
+    snprintf(alter_cmd, cmd_len, "alter %s = %c", device_name, value);
+
+    // send the alter command to ngspice
+    int error = ngSpice_Command(alter_cmd);
+    printf("setting %s = %cV\n", device_name, value);
+
+    if (error) {
+        printf("error when sending command: '%s' - check stderr\n", alter_cmd);
+        free(alter_cmd);
+        exit(1);
+    }
+
+    free(alter_cmd);
+}
+
+static float
+get_ngspice_vector_voltage(const char *vector_name)
+{
+    vector_info *info;
+    float voltage;
+
+    info = ngGet_Vec_Info(vector_name);
+    assert(info);
+
+    if (!info->v_length) {
+        printf("error: output vector '%s' has length zero - check stderr\n",
+               info->v_name);
+        exit(1);
+    }
+
+    voltage = info->v_realdata[info->v_length - 1];
+
+    return voltage;
+}
+
+static void
+assert_correct_voltage(
+    float voltage,
+    char expected_logic_level
+)
+{
+    switch (expected_logic_level) {
+        case '0':
+            // if logic level should be zero, assert
+            // that the voltage is less than 1.0V
+            assert(voltage < 1.0);
+            printf("correct voltage!\n");
+            break;
+        case '1':
+            // if logic level should be one, assert
+            // that the voltage is more than 4.0V
+            assert(voltage > 4.0);
+            printf("correct voltage!\n");
+            break;
+        case '?':
+            printf("voltage is undefined for these inputs, ignoring value\n");
+            break;
+        default:
+            break;
+    }
+}
+
+static void
+test(
+    // the path to the SPICE netlist
+    const char *netlist_path,
+    // the path to the '.cmp' file
+    const char *cmp_file_path,
+    // the labels of the SPICE nodes/voltage sources
+    // representing logic inputs/outputs, in the
+    // order they appear in the cmp file
+    const char *spice_input_labels[],
+    const char *spice_output_labels[]
+)
+{
+    char *cmp_file;
+    int cmp_file_len;
+    int cmp_file_pos;
+
+    init_test(netlist_path, cmp_file_path, &cmp_file, &cmp_file_len);
+    cmp_file_pos = 0;
 
     // skip to first newline (ignore column header)
     while ((cmp_file_pos + 1) < cmp_file_len && cmp_file[++cmp_file_pos] != '\n')
@@ -86,25 +174,9 @@ test(
         for (int j = 0; spice_input_labels[j]; cmp_file_pos++) {
             // if the current character is ascii zero or one
             if (cmp_file[cmp_file_pos] == '0' || cmp_file[cmp_file_pos] == '1') {
-                int cmd_len = 10 + strlen(spice_input_labels[j]) + 1;
-                char *alter_cmd = calloc(sizeof(char), cmd_len);
                 char input_voltage = cmp_file[cmp_file_pos] == '1' ? '5' : '0';
+                send_ngspice_alter_cmd(spice_input_labels[j], input_voltage);
 
-                // format the 'alter' command to set the right input voltage
-                snprintf(alter_cmd, cmd_len, "alter %s = %c",
-                         spice_input_labels[j], input_voltage);
-
-                // send the alter command to ngspice
-                int error = ngSpice_Command(alter_cmd);
-                printf("setting %s = %cV\n", spice_input_labels[j], input_voltage);
-
-                if (error) {
-                    printf("error when sending command: '%s'\n - check stderr", alter_cmd);
-                    free(alter_cmd);
-                    exit(1);
-                }
-
-                free(alter_cmd);
                 j++;
             }
         }
@@ -124,35 +196,12 @@ test(
         for (int j = 0; cmp_file[cmp_file_pos] != '\n'; cmp_file_pos++) {
             if (spice_output_labels[j] && (cmp_file[cmp_file_pos] == '0'
                                            || cmp_file[cmp_file_pos] == '1')) {
-                vector_info *output_info;
-                float output_voltage;
-
-                output_info = ngGet_Vec_Info(spice_output_labels[j]);
-                assert(output_info);
-
-                if (!output_info->v_length) {
-                    printf("error: output vector '%s' has length zero - check stderr\n",
-                           output_info->v_name);
-                    exit(1);
-                }
-
-                output_voltage = output_info->v_realdata[output_info->v_length - 1];
-                printf("%s voltage: %fV\n", output_info->v_name, output_voltage);
-
+                float output_voltage =
+                    get_ngspice_vector_voltage(spice_output_labels[j]);
+                printf("%s voltage: %fV\n", spice_output_labels[j], output_voltage);
                 // test that the output voltages from the simulation
                 // match the logic outputs in the cmp file
-                if (cmp_file[cmp_file_pos] == '0') {
-                    // if logic output should be zero, assert that
-                    // the output voltage is less than 1.0V
-                    assert(output_voltage < 1.0);
-                    printf("correct voltage!\n");
-                } else if (cmp_file[cmp_file_pos] == '1') {
-                    // if logic output should be one, assert that
-                    // the output voltage is more than 4.0V
-                    assert(output_voltage > 4.0);
-                    printf("correct voltage!\n");
-                }
-
+                assert_correct_voltage(output_voltage, cmp_file[cmp_file_pos]);
                 j++;
             }
         }
