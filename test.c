@@ -144,8 +144,12 @@ assert_correct_voltage(
     }
 }
 
+// tests combinational circuits. every input combination given by
+// the specified '.cmp' file is tried. after simulating, the
+// outputs are tested against the output values given by the cmp
+// file. the function exit()s if they do not match
 static void
-test(
+test_combinational(
     // the path to the SPICE netlist
     const char *netlist_path,
     // the path to the '.cmp' file
@@ -211,6 +215,108 @@ test(
     munmap(cmp_file, cmp_file_len);
 }
 
+// tests sequential circuits. the first column in a sequential
+// circuit cmp file is assumed to represent time
+static void
+test_sequential(
+    const char *netlist_path,
+    const char *cmp_file_path,
+    const char *spice_input_labels[],
+    const char *spice_output_labels[]
+)
+{
+    char *cmp_file;
+    int input_output_len;
+    char *input_output_values;
+    int cmp_file_len;
+    int cmp_file_pos;
+
+    init_test(netlist_path, cmp_file_path, &cmp_file, &cmp_file_len);
+    cmp_file_pos = 0;
+
+    while ((cmp_file_pos + 1) < cmp_file_len && cmp_file[++cmp_file_pos] != '\n')
+        continue;
+
+    input_output_len = cmp_file_len; // more bytes than needed
+    input_output_values = calloc(sizeof(char), cmp_file_len - cmp_file_pos);
+
+    // set breakpoints at the right times and gather up
+    // all of the input/output values in the cmp file
+    for (int i = 0; cmp_file_pos < cmp_file_len; cmp_file_pos++) {
+        // skip to the first character that is a number (ascii 0x30-0x39)
+        while (cmp_file[cmp_file_pos] < 0x30 || cmp_file[cmp_file_pos] > 0x39)
+            cmp_file_pos++;
+
+        // .. this character represents the current row's time
+        int time = strtol(&cmp_file[cmp_file_pos], NULL, 10);
+        int cmd_len = 30;
+        char *break_cmd = calloc(sizeof(char), cmd_len);
+        snprintf(break_cmd, cmd_len, "stop when time = %ius", time);
+        // send a command to set a breakpoint at this time
+        int error = ngSpice_Command(break_cmd);
+        free(break_cmd);
+
+        if (error) {
+            printf("error when sending command: '%s' - check stderr\n", break_cmd);
+            exit(1);
+        }
+
+        // store the rest of the input/output values on
+        // the current row in 'input_output_values'
+        while ((cmp_file_pos + 1) < cmp_file_len && cmp_file[++cmp_file_pos] != '\n') {
+            if (cmp_file[cmp_file_pos] == '?'
+                || cmp_file[cmp_file_pos] == '0'
+                || cmp_file[cmp_file_pos] == '1') {
+                input_output_values[i] = cmp_file[cmp_file_pos];
+                input_output_len = ++i;
+            }
+        }
+    }
+
+    // TODO: realloc for good measure
+
+    // run until the first breakpoint is hit
+    int error = ngSpice_Command("run");
+    if (error) {
+        puts("error when sending command: 'run' - check stderr");
+        exit(1);
+    }
+
+    // HACK: delete the first breakpoint, which is assumed to always be at
+    // time = 0. otherwise, ngspice will get stuck on this breakpoint
+    error = ngSpice_Command("delete '1");
+    if (error) {
+        puts("error when sending command: 'delete '1' - check stderr");
+        exit(1);
+    }
+
+    int i = 0;
+    while (i < input_output_len) {
+        // loop over input values and set the corresponding input voltages
+        for (int j = 0; spice_input_labels[j]; j++, i++) {
+            char input_voltage = input_output_values[i] == '1' ? '5' : '0';
+            send_ngspice_alter_cmd(spice_input_labels[j], input_voltage);
+        }
+
+        error = ngSpice_Command("resume");
+        if (error) {
+            puts("error when sending command: 'resume' - check stderr");
+            exit(1);
+        }
+
+        // loop over output values and test the corresponding output voltages
+        for (int j = 0; spice_output_labels[j]; j++, i++) {
+            float output_voltage = get_ngspice_vector_voltage(spice_output_labels[j]);
+            printf("%s voltage: %fV\n", spice_output_labels[j], output_voltage);
+            assert_correct_voltage(output_voltage, input_output_values[i]);
+        }
+    }
+
+    puts("");
+    free(input_output_values);
+    munmap(cmp_file, cmp_file_len);
+}
+
 int
 main(void)
 {
@@ -218,63 +324,63 @@ main(void)
     ngSpice_Init(ngspice_output_callback, NULL, ngspice_exit_callback,
                  NULL, NULL, NULL, NULL);
 
-    test("not/test.sp",
+    test_combinational("not/test.sp",
          "not/Not.cmp",
          (const char *[]) { "vin", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("nand/test.sp",
+    test_combinational("nand/test.sp",
          "nand/Nand.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("nor/test.sp",
+    test_combinational("nor/test.sp",
          "nor/Nor.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("and/test.sp",
+    test_combinational("and/test.sp",
          "and/And.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("or/test.sp",
+    test_combinational("or/test.sp",
          "or/Or.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("xor/test.sp",
+    test_combinational("xor/test.sp",
          "xor/Xor.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("mux/test.sp",
+    test_combinational("mux/test.sp",
          "mux/Mux.cmp",
          (const char *[]) { "va", "vb", "vsel", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("dmux/test.sp",
+    test_combinational("dmux/test.sp",
          "dmux/DMux.cmp",
          (const char *[]) { "vin", "vsel", NULL },
          (const char *[]) { "na", "nb", NULL });
 
-    test("4waymux/test.sp",
+    test_combinational("4waymux/test.sp",
          "4waymux/4WayMux.cmp",
          (const char *[]) { "va", "vb", "vc", "vd",
                             "vsel0", "vsel1", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("halfadder/test.sp",
+    test_combinational("halfadder/test.sp",
          "halfadder/HalfAdder.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nsum", "ncarry", NULL });
 
-    test("fulladder/test.sp",
+    test_combinational("fulladder/test.sp",
          "fulladder/FullAdder.cmp",
          (const char *[]) { "va", "vb", "vc", NULL },
          (const char *[]) { "nsum", "ncarry", NULL });
 
-    test("8bitadder/test.sp",
+    test_combinational("8bitadder/test.sp",
          "8bitadder/Add8.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4",
                             "va3", "va2", "va1", "va0",
@@ -284,7 +390,7 @@ main(void)
                             "nsum4", "nsum3", "nsum2",
                             "nsum1", "nsum0", "ncarry", NULL });
 
-    test("8bitand/test.sp",
+    test_combinational("8bitand/test.sp",
          "8bitand/And8.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4",
                             "va3", "va2", "va1", "va0",
@@ -294,7 +400,7 @@ main(void)
                             "nout4", "nout3", "nout2",
                             "nout1", "nout0", NULL });
 
-    test("8bitxor/test.sp",
+    test_combinational("8bitxor/test.sp",
          "8bitxor/Xor8.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4",
                             "va3", "va2", "va1", "va0",
@@ -304,7 +410,7 @@ main(void)
                             "nout4", "nout3", "nout2",
                             "nout1", "nout0", NULL });
 
-    test("8bitmux/test.sp",
+    test_combinational("8bitmux/test.sp",
          "8bitmux/Mux8.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4", "va3",
                             "va2", "va1", "va0", "vb7", "vb6",
@@ -314,7 +420,7 @@ main(void)
                             "nout4", "nout3", "nout2",
                             "nout1", "nout0", NULL });
 
-    test("8bitmux/test.sp",
+    test_combinational("8bitmux/test.sp",
          "8bitmux/Mux8.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4", "va3",
                             "va2", "va1", "va0", "vb7", "vb6",
@@ -324,21 +430,21 @@ main(void)
                             "nout4", "nout3", "nout2",
                             "nout1", "nout0", NULL });
 
-    test("8wayor/test.sp",
+    test_combinational("8wayor/test.sp",
          "8wayor/Or8Way.cmp",
          (const char *[]) { "vin7", "vin6", "vin5",
                             "vin4", "vin3", "vin2",
                             "vin1", "vin0", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("8waynor/test.sp",
+    test_combinational("8waynor/test.sp",
          "8waynor/Nor8Way.cmp",
          (const char *[]) { "vin7", "vin6", "vin5",
                             "vin4", "vin3", "vin2",
                             "vin1", "vin0", NULL },
          (const char *[]) { "nout", NULL });
 
-    test("alu/test.sp",
+    test_combinational("alu/test.sp",
          "alu/ALU.cmp",
          (const char *[]) { "vx7", "vx6", "vx5", "vx4", "vx3",
                             "vx2", "vx1", "vx0", "vy7", "vy6",
