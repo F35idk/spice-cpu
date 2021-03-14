@@ -66,7 +66,14 @@ init_test(
     free(source_cmd);
 
     if (error) {
-        printf("error when sending command: '%s'\n - check stderr", source_cmd);
+        printf("error when sending command: '%s' - check stderr\n", source_cmd);
+        exit(1);
+    }
+
+    // delete all previous breakpoints
+    error = ngSpice_Command("delete all");
+    if (error) {
+        puts("error when sending command: 'delete all' - check stderr");
         exit(1);
     }
 }
@@ -247,11 +254,11 @@ test_sequential(
         while (cmp_file[cmp_file_pos] < 0x30 || cmp_file[cmp_file_pos] > 0x39)
             cmp_file_pos++;
 
-        // .. this character represents the current row's time
-        int time = strtol(&cmp_file[cmp_file_pos], NULL, 10);
+        // - this character represents the current row's time
+        double time = (strtod(&cmp_file[cmp_file_pos], NULL) + 0.1);
         int cmd_len = 30;
         char *break_cmd = calloc(sizeof(char), cmd_len);
-        snprintf(break_cmd, cmd_len, "stop when time = %ius", time);
+        snprintf(break_cmd, cmd_len, "stop when time = %fus", time);
         // send a command to set a breakpoint at this time
         int error = ngSpice_Command(break_cmd);
         free(break_cmd);
@@ -279,14 +286,6 @@ test_sequential(
     int error = ngSpice_Command("run");
     if (error) {
         puts("error when sending command: 'run' - check stderr");
-        exit(1);
-    }
-
-    // HACK: delete the first breakpoint, which is assumed to always be at
-    // time = 0. otherwise, ngspice will get stuck on this breakpoint
-    error = ngSpice_Command("delete '1");
-    if (error) {
-        puts("error when sending command: 'delete '1' - check stderr");
         exit(1);
     }
 
