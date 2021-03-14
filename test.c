@@ -457,5 +457,10 @@ main(void)
                             // is used as the ALU negative flag
                             "nout1", "nout0", "nzr", "nout7", NULL });
 
+    test_sequential("srlatch/test.sp",
+         "srlatch/SRLatch.cmp",
+         (const char *[]) { "vs", "vr", NULL },
+         (const char *[]) { "nq", NULL });
+
     return 0;
 }
