@@ -461,5 +461,10 @@ main(void)
          (const char *[]) { "vs", "vr", NULL },
          (const char *[]) { "nq", NULL });
 
+    test_sequential("dlatch/test.sp",
+         "dlatch/DLatch.cmp",
+         (const char *[]) { "vd", "ve", NULL },
+         (const char *[]) { "nq", NULL });
+
     return 0;
 }
