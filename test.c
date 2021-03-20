@@ -59,7 +59,7 @@ init_test(
     close(cmp_fd);
 
     int cmd_len = 7 + strlen(netlist_path) + 1;
-    char *source_cmd = calloc(sizeof(char), cmd_len);
+    char *source_cmd = calloc(1, cmd_len);
     snprintf(source_cmd, cmd_len, "source %s", netlist_path);
     // send command to open netlist file
     int error = ngSpice_Command(source_cmd);
@@ -86,7 +86,7 @@ send_ngspice_alter_cmd(
 )
 {
     int cmd_len = 10 + strlen(device_name) + 1;
-    char *alter_cmd = calloc(sizeof(char), cmd_len);
+    char *alter_cmd = calloc(1, cmd_len);
 
     // format the 'alter' command to set the right device parameter and value
     snprintf(alter_cmd, cmd_len, "alter %s = %c", device_name, value);
@@ -245,7 +245,7 @@ test_sequential(
         continue;
 
     input_output_len = cmp_file_len; // more bytes than needed
-    input_output_values = calloc(sizeof(char), cmp_file_len - cmp_file_pos);
+    input_output_values = calloc(1, cmp_file_len - cmp_file_pos);
 
     // set breakpoints at the right times and gather up
     // all of the input/output values in the cmp file
@@ -254,10 +254,10 @@ test_sequential(
         while (cmp_file[cmp_file_pos] < 0x30 || cmp_file[cmp_file_pos] > 0x39)
             cmp_file_pos++;
 
-        // - this character represents the current row's time
-        double time = (strtod(&cmp_file[cmp_file_pos], NULL) + 0.1);
+        char *new_cmp_file_pos = NULL;
+        double time = (strtod(&cmp_file[cmp_file_pos], &new_cmp_file_pos) + 0.1);
         int cmd_len = 30;
-        char *break_cmd = calloc(sizeof(char), cmd_len);
+        char *break_cmd = calloc(1, cmd_len);
         snprintf(break_cmd, cmd_len, "stop when time = %fus", time);
         // send a command to set a breakpoint at this time
         int error = ngSpice_Command(break_cmd);
@@ -267,6 +267,8 @@ test_sequential(
             printf("error when sending command: '%s' - check stderr\n", break_cmd);
             exit(1);
         }
+
+        cmp_file_pos += (int) (new_cmp_file_pos - &cmp_file[cmp_file_pos]);
 
         // store the rest of the input/output values on
         // the current row in 'input_output_values'
