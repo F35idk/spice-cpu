@@ -468,5 +468,10 @@ main(void)
          (const char *[]) { "vd", "ve", NULL },
          (const char *[]) { "nq", NULL });
 
+    test_sequential("dflipflop/test.sp",
+         "dflipflop/DFlipFlop.cmp",
+         (const char *[]) { "vd", "vclk", NULL },
+         (const char *[]) { "nq", NULL });
+
     return 0;
 }
