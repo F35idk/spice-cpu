@@ -1,0 +1,12 @@
+| time/us | j | k | clk | q |
+|     0   | 0 | 0 |  0  | ? |
+|    20   | 0 | 1 |  1  | ? |
+|    40   | 0 | 1 |  0  | 0 | # latch on falling edge
+|    60   | 1 | 1 |  1  | 0 |
+|    80   | 1 | 1 |  0  | 1 | # toggle on falling edge
+|   100   | 1 | 1 |  1  | 1 |
+|   120   | 1 | 1 |  0  | 0 | # toggle again
+|   140   | 1 | 0 |  1  | 0 |
+|   160   | 1 | 0 |  0  | 1 | # then latch
+|   180   | 1 | 1 |  1  | 1 |
+|   200   | 1 | 1 |  0  | 0 | # then toggle

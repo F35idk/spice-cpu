@@ -473,5 +473,10 @@ main(void)
          (const char *[]) { "vd", "vclk", NULL },
          (const char *[]) { "nq", NULL });
 
+    test_sequential("jkflipflop/test.sp",
+         "jkflipflop/JKFlipFlop.cmp",
+         (const char *[]) { "vj", "vk", "vclk", NULL },
+         (const char *[]) { "nq", NULL });
+
     return 0;
 }
