@@ -120,7 +120,6 @@ get_ngspice_vector_voltage(const char *vector_name)
     }
 
     voltage = info->v_realdata[info->v_length - 1];
-
     return voltage;
 }
 
@@ -268,7 +267,7 @@ test_sequential(
             exit(1);
         }
 
-        cmp_file_pos += (int) (new_cmp_file_pos - &cmp_file[cmp_file_pos]);
+        cmp_file_pos = (int) (new_cmp_file_pos - &cmp_file[0]);
 
         // store the rest of the input/output values on
         // the current row in 'input_output_values'
@@ -291,8 +290,7 @@ test_sequential(
         exit(1);
     }
 
-    int i = 0;
-    while (i < input_output_len) {
+    for (int i = 0; i < input_output_len;) {
         // loop over input values and set the corresponding input voltages
         for (int j = 0; spice_input_labels[j]; j++, i++) {
             char input_voltage = input_output_values[i] == '1' ? '5' : '0';
