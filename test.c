@@ -476,5 +476,15 @@ main(void)
          (const char *[]) { "vj", "vk", "vclk", NULL },
          (const char *[]) { "nq", NULL });
 
+    test_sequential("8_bit_register/test.sp",
+         "8_bit_register/8_bit_register.cmp",
+         (const char *[]) { "vd7", "vd6", "vd5",
+                            "vd4", "vd3", "vd2",
+                            "vd1", "vd0", "vclk",
+                            "vie", "voe", NULL },
+         (const char *[]) { "nq7", "nq6", "nq5",
+                            "nq4", "nq3", "nq2",
+                            "nq1", "nq0", NULL });
+
     return 0;
 }
