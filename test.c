@@ -478,9 +478,9 @@ main(void)
 
     test_sequential("8_bit_register/test.sp",
          "8_bit_register/8_bit_register.cmp",
-         (const char *[]) { "vd7", "vd6", "vd5",
-                            "vd4", "vd3", "vd2",
-                            "vd1", "vd0", "vclk",
+         (const char *[]) { "vq7", "vq6", "vq5",
+                            "vq4", "vq3", "vq2",
+                            "vq1", "vq0", "vclk",
                             "vie", "voe", NULL },
          (const char *[]) { "nq7", "nq6", "nq5",
                             "nq4", "nq3", "nq2",
