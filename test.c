@@ -486,5 +486,16 @@ main(void)
                             "nq4", "nq3", "nq2",
                             "nq1", "nq0", NULL });
 
+    test_combinational("4_to_16_decoder/test.sp",
+         "4_to_16_decoder/4_to_16_decoder.cmp",
+         (const char *[]) { "va", "vb", "vc",
+                            "vd", NULL },
+         (const char *[]) { "nd0", "nd1", "nd2",
+                            "nd3", "nd4", "nd5",
+                            "nd6", "nd7", "nd8",
+                            "nd9", "nd10", "nd11",
+                            "nd12", "nd13", "nd14",
+                            "nd15", NULL });
+
     return 0;
 }
