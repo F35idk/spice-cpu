@@ -1,8 +1,7 @@
 * edge detector subcircuit
 
+.include ../device_models.inc
 .include ../not/not.inc
-
-.model 1n4148 d(is=2.52n rs=.568 n=1.752 cjo=4p m=.4 tt=20n iave=200m vpk=75 mfg=onsemi)
 
 .subckt edge_detector clk out vdd vss
 c1 n003 n002 100n

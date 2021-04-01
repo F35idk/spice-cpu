@@ -1,5 +1,6 @@
 *  jk flip-flop subcircuit
 
+.include ../device_models.inc
 .include ../sr_latch/sr_latch.inc
 .include ../not/not.inc
 .include ../and/and.inc
