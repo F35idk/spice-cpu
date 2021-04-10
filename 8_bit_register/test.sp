@@ -15,14 +15,14 @@ vq4 n016 0 5
 vq5 n015 0 5
 vq6 n014 0 5
 vq7 n013 0 5
-r1 nq7 n013 100
-r2 nq6 n014 100
-r3 nq5 n015 100
-r4 nq4 n016 100
-r5 nq3 n017 100
-r6 nq2 n018 100
-r7 nq1 n019 100
-r8 nq0 n020 100
+r1 nq7 n013 100k
+r2 nq6 n014 100k
+r3 nq5 n015 100k
+r4 nq4 n016 100k
+r5 nq3 n017 100k
+r6 nq2 n018 100k
+r7 nq1 n019 100k
+r8 nq0 n020 100k
 
 .tran 1ns 201us
 .end

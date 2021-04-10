@@ -2,7 +2,7 @@
 
 .include 8_way_or.inc
 
-r1 nout 0 1k
+r1 nout 0 100k
 vin3 n005 0 5
 vin1 n003 0 5
 vin2 n004 0 5

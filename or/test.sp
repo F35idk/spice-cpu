@@ -3,7 +3,7 @@
 .include or.inc
 
 v1 n001 0 5
-r1 nout 0 1k
+r1 nout 0 100k
 xx1 n002 n003 nout n001 0 or
 vb n003 0 5
 va n002 0 0

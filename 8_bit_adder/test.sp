@@ -2,7 +2,7 @@
 
 .include 8_bit_adder.inc
 
-r1 ncarry 0 1k
+r1 ncarry 0 100k
 vb4 n022 0 5
 vb2 n018 0 5
 vb3 n020 0 5
@@ -21,14 +21,14 @@ va3 n005 0 0
 vb7 n026 0 5
 vb0 n014 0 5
 v1 n001 0 5
-r2 nsum7 0 1k
-r3 nsum6 0 1k
-r4 nsum5 0 1k
-r5 nsum4 0 1k
-r6 nsum3 0 1k
-r7 nsum2 0 1k
-r8 nsum1 0 1k
-r9 nsum0 0 1k
+r2 nsum7 0 100k
+r3 nsum6 0 100k
+r4 nsum5 0 100k
+r5 nsum4 0 100k
+r6 nsum3 0 100k
+r7 nsum2 0 100k
+r8 nsum1 0 100k
+r9 nsum0 0 100k
 vc n027 0 0
 
 .tran 1ns 100ns

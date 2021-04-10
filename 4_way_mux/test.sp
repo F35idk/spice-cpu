@@ -3,7 +3,7 @@
 .include 4_way_mux.inc
 
 v1 n001 0 5
-r1 nout 0 1k
+r1 nout 0 100k
 va n004 0 0
 vsel1 n002 0 0
 vsel0 n003 0 0

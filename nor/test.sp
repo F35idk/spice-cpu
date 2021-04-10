@@ -2,7 +2,7 @@
 
 .include nor.inc
 
-r1 nout 0 1k
+r1 nout 0 100k
 v1 n001 0 5
 xx1 n002 n004 n001 0 nout nor
 va n002 0 0

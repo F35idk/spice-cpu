@@ -19,14 +19,14 @@ va3 n006 0 5
 vb7 n026 0 0
 vb0 n015 0 5
 v1 n001 0 5
-r1 nout7 0 1k
-r2 nout6 0 1k
-r3 nout5 0 1k
-r4 nout4 0 1k
-r5 nout3 0 1k
-r6 nout2 0 1k
-r7 nout1 0 1k
-r8 nout0 0 1k
+r1 nout7 0 100k
+r2 nout6 0 100k
+r3 nout5 0 100k
+r4 nout4 0 100k
+r5 nout3 0 100k
+r6 nout2 0 100k
+r7 nout1 0 100k
+r8 nout0 0 100k
 vsel n002 0 5
 xx1 n003 n004 n005 n006 n007 n009 n011 n013 n015 n017 n019 n021 n023 n024 n025 n026 n002 nout0 nout1 nout2 nout3 nout4 nout5 nout6 nout7 n001 0 8_bit_mux
 

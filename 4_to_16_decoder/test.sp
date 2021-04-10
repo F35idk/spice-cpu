@@ -8,22 +8,22 @@ va n008 0 5
 vb n010 0 5
 vc n012 0 5
 vd n014 0 5
-r1 nd15 0 1k
-r2 nd14 0 1k
-r3 nd13 0 1k
-r4 nd12 0 1k
-r5 nd11 0 1k
-r6 nd10 0 1k
-r7 nd9 0 1k
-r8 nd8 0 1k
-r9 nd7 0 1k
-r10 nd6 0 1k
-r11 nd5 0 1k
-r12 nd4 0 1k
-r13 nd3 0 1k
-r14 nd2 0 1k
-r15 nd1 0 1k
-r16 nd0 0 1k
+r1 nd15 0 100k
+r2 nd14 0 100k
+r3 nd13 0 100k
+r4 nd12 0 100k
+r5 nd11 0 100k
+r6 nd10 0 100k
+r7 nd9 0 100k
+r8 nd8 0 100k
+r9 nd7 0 100k
+r10 nd6 0 100k
+r11 nd5 0 100k
+r12 nd4 0 100k
+r13 nd3 0 100k
+r14 nd2 0 100k
+r15 nd1 0 100k
+r16 nd0 0 100k
 
 .tran 1ns 20u
 .option rshunt=1e9
