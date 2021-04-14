@@ -323,138 +323,138 @@ main(void)
     ngSpice_Init(ngspice_output_callback, NULL, ngspice_exit_callback,
                  NULL, NULL, NULL, NULL);
 
-    // test_combinational("not/test.sp",
-    //      "not/not.cmp",
-    //      (const char *[]) { "vin", NULL },
-    //      (const char *[]) { "nout", NULL });
+    test_combinational("not/test.sp",
+         "not/not.cmp",
+         (const char *[]) { "vin", NULL },
+         (const char *[]) { "nout", NULL });
 
-    // test_combinational("nand/test.sp",
-    //      "nand/nand.cmp",
-    //      (const char *[]) { "va", "vb", NULL },
-    //      (const char *[]) { "nout", NULL });
+    test_combinational("nand/test.sp",
+         "nand/nand.cmp",
+         (const char *[]) { "va", "vb", NULL },
+         (const char *[]) { "nout", NULL });
 
-    // test_combinational("nor/test.sp",
-    //      "nor/nor.cmp",
-    //      (const char *[]) { "va", "vb", NULL },
-    //      (const char *[]) { "nout", NULL });
+    test_combinational("nor/test.sp",
+         "nor/nor.cmp",
+         (const char *[]) { "va", "vb", NULL },
+         (const char *[]) { "nout", NULL });
 
-    // test_combinational("and/test.sp",
-    //      "and/and.cmp",
-    //      (const char *[]) { "va", "vb", NULL },
-    //      (const char *[]) { "nout", NULL });
+    test_combinational("and/test.sp",
+         "and/and.cmp",
+         (const char *[]) { "va", "vb", NULL },
+         (const char *[]) { "nout", NULL });
 
-    // test_combinational("or/test.sp",
-    //      "or/or.cmp",
-    //      (const char *[]) { "va", "vb", NULL },
-    //      (const char *[]) { "nout", NULL });
+    test_combinational("or/test.sp",
+         "or/or.cmp",
+         (const char *[]) { "va", "vb", NULL },
+         (const char *[]) { "nout", NULL });
 
-    // test_combinational("xor/test.sp",
-    //      "xor/xor.cmp",
-    //      (const char *[]) { "va", "vb", NULL },
-    //      (const char *[]) { "nout", NULL });
+    test_combinational("xor/test.sp",
+         "xor/xor.cmp",
+         (const char *[]) { "va", "vb", NULL },
+         (const char *[]) { "nout", NULL });
 
-    // test_combinational("mux/test.sp",
-    //      "mux/mux.cmp",
-    //      (const char *[]) { "va", "vb", "vsel", NULL },
-    //      (const char *[]) { "nout", NULL });
+    test_combinational("mux/test.sp",
+         "mux/mux.cmp",
+         (const char *[]) { "va", "vb", "vsel", NULL },
+         (const char *[]) { "nout", NULL });
 
-    // test_combinational("dmux/test.sp",
-    //      "dmux/dmux.cmp",
-    //      (const char *[]) { "vin", "vsel", NULL },
-    //      (const char *[]) { "na", "nb", NULL });
+    test_combinational("dmux/test.sp",
+         "dmux/dmux.cmp",
+         (const char *[]) { "vin", "vsel", NULL },
+         (const char *[]) { "na", "nb", NULL });
 
-    // test_combinational("4_way_mux/test.sp",
-    //      "4_way_mux/4_way_mux.cmp",
-    //      (const char *[]) { "va", "vb", "vc", "vd",
-    //                         "vsel0", "vsel1", NULL },
-    //      (const char *[]) { "nout", NULL });
+    test_combinational("4_way_mux/test.sp",
+         "4_way_mux/4_way_mux.cmp",
+         (const char *[]) { "va", "vb", "vc", "vd",
+                            "vsel0", "vsel1", NULL },
+         (const char *[]) { "nout", NULL });
 
-    // test_combinational("half_adder/test.sp",
-    //      "half_adder/half_adder.cmp",
-    //      (const char *[]) { "va", "vb", NULL },
-    //      (const char *[]) { "nsum", "ncarry", NULL });
+    test_combinational("half_adder/test.sp",
+         "half_adder/half_adder.cmp",
+         (const char *[]) { "va", "vb", NULL },
+         (const char *[]) { "nsum", "ncarry", NULL });
 
-    // test_combinational("full_adder/test.sp",
-    //      "full_adder/full_adder.cmp",
-    //      (const char *[]) { "va", "vb", "vc", NULL },
-    //      (const char *[]) { "nsum", "ncarry", NULL });
+    test_combinational("full_adder/test.sp",
+         "full_adder/full_adder.cmp",
+         (const char *[]) { "va", "vb", "vc", NULL },
+         (const char *[]) { "nsum", "ncarry", NULL });
 
-    // test_combinational("8_bit_adder/test.sp",
-    //      "8_bit_adder/8_bit_adder.cmp",
-    //      (const char *[]) { "va7", "va6", "va5", "va4",
-    //                         "va3", "va2", "va1", "va0",
-    //                         "vb7", "vb6", "vb5", "vb4",
-    //                         "vb3", "vb2", "vb1", "vb0", NULL },
-    //      (const char *[]) { "nsum7", "nsum6", "nsum5",
-    //                         "nsum4", "nsum3", "nsum2",
-    //                         "nsum1", "nsum0", "ncarry", NULL });
+    test_combinational("8_bit_adder/test.sp",
+         "8_bit_adder/8_bit_adder.cmp",
+         (const char *[]) { "va7", "va6", "va5", "va4",
+                            "va3", "va2", "va1", "va0",
+                            "vb7", "vb6", "vb5", "vb4",
+                            "vb3", "vb2", "vb1", "vb0", NULL },
+         (const char *[]) { "nsum7", "nsum6", "nsum5",
+                            "nsum4", "nsum3", "nsum2",
+                            "nsum1", "nsum0", "ncarry", NULL });
 
-    // test_combinational("8_bit_and/test.sp",
-    //      "8_bit_and/8_bit_and.cmp",
-    //      (const char *[]) { "va7", "va6", "va5", "va4",
-    //                         "va3", "va2", "va1", "va0",
-    //                         "vb7", "vb6", "vb5", "vb4",
-    //                         "vb3", "vb2", "vb1", "vb0", NULL },
-    //      (const char *[]) { "nout7", "nout6", "nout5",
-    //                         "nout4", "nout3", "nout2",
-    //                         "nout1", "nout0", NULL });
+    test_combinational("8_bit_and/test.sp",
+         "8_bit_and/8_bit_and.cmp",
+         (const char *[]) { "va7", "va6", "va5", "va4",
+                            "va3", "va2", "va1", "va0",
+                            "vb7", "vb6", "vb5", "vb4",
+                            "vb3", "vb2", "vb1", "vb0", NULL },
+         (const char *[]) { "nout7", "nout6", "nout5",
+                            "nout4", "nout3", "nout2",
+                            "nout1", "nout0", NULL });
 
-    // test_combinational("8_bit_xor/test.sp",
-    //      "8_bit_xor/8_bit_xor.cmp",
-    //      (const char *[]) { "va7", "va6", "va5", "va4",
-    //                         "va3", "va2", "va1", "va0",
-    //                         "vb7", "vb6", "vb5", "vb4",
-    //                         "vb3", "vb2", "vb1", "vb0", NULL },
-    //      (const char *[]) { "nout7", "nout6", "nout5",
-    //                         "nout4", "nout3", "nout2",
-    //                         "nout1", "nout0", NULL });
+    test_combinational("8_bit_xor/test.sp",
+         "8_bit_xor/8_bit_xor.cmp",
+         (const char *[]) { "va7", "va6", "va5", "va4",
+                            "va3", "va2", "va1", "va0",
+                            "vb7", "vb6", "vb5", "vb4",
+                            "vb3", "vb2", "vb1", "vb0", NULL },
+         (const char *[]) { "nout7", "nout6", "nout5",
+                            "nout4", "nout3", "nout2",
+                            "nout1", "nout0", NULL });
 
-    // test_combinational("8_bit_mux/test.sp",
-    //      "8_bit_mux/8_bit_mux.cmp",
-    //      (const char *[]) { "va7", "va6", "va5", "va4", "va3",
-    //                         "va2", "va1", "va0", "vb7", "vb6",
-    //                         "vb5", "vb4", "vb3", "vb2", "vb1",
-    //                         "vb0", "vsel", NULL },
-    //      (const char *[]) { "nout7", "nout6", "nout5",
-    //                         "nout4", "nout3", "nout2",
-    //                         "nout1", "nout0", NULL });
+    test_combinational("8_bit_mux/test.sp",
+         "8_bit_mux/8_bit_mux.cmp",
+         (const char *[]) { "va7", "va6", "va5", "va4", "va3",
+                            "va2", "va1", "va0", "vb7", "vb6",
+                            "vb5", "vb4", "vb3", "vb2", "vb1",
+                            "vb0", "vsel", NULL },
+         (const char *[]) { "nout7", "nout6", "nout5",
+                            "nout4", "nout3", "nout2",
+                            "nout1", "nout0", NULL });
 
-    // test_combinational("8_bit_mux/test.sp",
-    //      "8_bit_mux/8_bit_mux.cmp",
-    //      (const char *[]) { "va7", "va6", "va5", "va4", "va3",
-    //                         "va2", "va1", "va0", "vb7", "vb6",
-    //                         "vb5", "vb4", "vb3", "vb2", "vb1",
-    //                         "vb0", "vsel", NULL },
-    //      (const char *[]) { "nout7", "nout6", "nout5",
-    //                         "nout4", "nout3", "nout2",
-    //                         "nout1", "nout0", NULL });
+    test_combinational("8_bit_mux/test.sp",
+         "8_bit_mux/8_bit_mux.cmp",
+         (const char *[]) { "va7", "va6", "va5", "va4", "va3",
+                            "va2", "va1", "va0", "vb7", "vb6",
+                            "vb5", "vb4", "vb3", "vb2", "vb1",
+                            "vb0", "vsel", NULL },
+         (const char *[]) { "nout7", "nout6", "nout5",
+                            "nout4", "nout3", "nout2",
+                            "nout1", "nout0", NULL });
 
-    // test_combinational("8_way_or/test.sp",
-    //      "8_way_or/8_way_or.cmp",
-    //      (const char *[]) { "vin7", "vin6", "vin5",
-    //                         "vin4", "vin3", "vin2",
-    //                         "vin1", "vin0", NULL },
-    //      (const char *[]) { "nout", NULL });
+    test_combinational("8_way_or/test.sp",
+         "8_way_or/8_way_or.cmp",
+         (const char *[]) { "vin7", "vin6", "vin5",
+                            "vin4", "vin3", "vin2",
+                            "vin1", "vin0", NULL },
+         (const char *[]) { "nout", NULL });
 
-    // test_combinational("8_way_nor/test.sp",
-    //      "8_way_nor/8_way_nor.cmp",
-    //      (const char *[]) { "vin7", "vin6", "vin5",
-    //                         "vin4", "vin3", "vin2",
-    //                         "vin1", "vin0", NULL },
-    //      (const char *[]) { "nout", NULL });
+    test_combinational("8_way_nor/test.sp",
+         "8_way_nor/8_way_nor.cmp",
+         (const char *[]) { "vin7", "vin6", "vin5",
+                            "vin4", "vin3", "vin2",
+                            "vin1", "vin0", NULL },
+         (const char *[]) { "nout", NULL });
 
-    // test_combinational("alu/test.sp",
-    //      "alu/alu.cmp",
-    //      (const char *[]) { "vx7", "vx6", "vx5", "vx4", "vx3",
-    //                         "vx2", "vx1", "vx0", "vy7", "vy6",
-    //                         "vy5", "vy4", "vy3", "vy2", "vy1",
-    //                         "vy0", "vzx", "vnx", "vzy", "vny",
-    //                         "vf", "vnout", NULL },
-    //      (const char *[]) { "nout7", "nout6", "nout5",
-    //                         "nout4", "nout3", "nout2",
-    //                         // NOTE: 'nout7' (the 8th bit of the output)
-    //                         // is used as the ALU negative flag
-    //                         "nout1", "nout0", "nzr", "nout7", NULL });
+    test_combinational("alu/test.sp",
+         "alu/alu.cmp",
+         (const char *[]) { "vx7", "vx6", "vx5", "vx4", "vx3",
+                            "vx2", "vx1", "vx0", "vy7", "vy6",
+                            "vy5", "vy4", "vy3", "vy2", "vy1",
+                            "vy0", "vzx", "vnx", "vzy", "vny",
+                            "vf", "vnout", NULL },
+         (const char *[]) { "nout7", "nout6", "nout5",
+                            "nout4", "nout3", "nout2",
+                            // NOTE: 'nout7' (the 8th bit of the output)
+                            // is used as the ALU negative flag
+                            "nout1", "nout0", "nzr", "nout7", NULL });
 
     test_sequential("sr_latch/test.sp",
          "sr_latch/sr_latch.cmp",
@@ -476,26 +476,26 @@ main(void)
          (const char *[]) { "vj", "vk", "vclk", NULL },
          (const char *[]) { "nq", NULL });
 
-    // test_sequential("8_bit_register/test.sp",
-    //      "8_bit_register/8_bit_register.cmp",
-    //      (const char *[]) { "vq7", "vq6", "vq5",
-    //                         "vq4", "vq3", "vq2",
-    //                         "vq1", "vq0", "vclk",
-    //                         "vie", "voe", NULL },
-    //      (const char *[]) { "nq7", "nq6", "nq5",
-    //                         "nq4", "nq3", "nq2",
-    //                         "nq1", "nq0", NULL });
+    test_sequential("8_bit_register/test.sp",
+         "8_bit_register/8_bit_register.cmp",
+         (const char *[]) { "vq7", "vq6", "vq5",
+                            "vq4", "vq3", "vq2",
+                            "vq1", "vq0", "vclk",
+                            "vie", "voe", NULL },
+         (const char *[]) { "nq7", "nq6", "nq5",
+                            "nq4", "nq3", "nq2",
+                            "nq1", "nq0", NULL });
 
-    // test_combinational("4_to_16_decoder/test.sp",
-    //      "4_to_16_decoder/4_to_16_decoder.cmp",
-    //      (const char *[]) { "va", "vb", "vc",
-    //                         "vd", NULL },
-    //      (const char *[]) { "nd0", "nd1", "nd2",
-    //                         "nd3", "nd4", "nd5",
-    //                         "nd6", "nd7", "nd8",
-    //                         "nd9", "nd10", "nd11",
-    //                         "nd12", "nd13", "nd14",
-    //                         "nd15", NULL });
+    test_combinational("4_to_16_decoder/test.sp",
+         "4_to_16_decoder/4_to_16_decoder.cmp",
+         (const char *[]) { "va", "vb", "vc",
+                            "vd", NULL },
+         (const char *[]) { "nd0", "nd1", "nd2",
+                            "nd3", "nd4", "nd5",
+                            "nd6", "nd7", "nd8",
+                            "nd9", "nd10", "nd11",
+                            "nd12", "nd13", "nd14",
+                            "nd15", NULL });
 
     test_sequential("sram/test.sp", "sram/sram.cmp",
          (const char *[]) { "va3", "va2", "va1",
