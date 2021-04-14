@@ -1,12 +1,12 @@
 | time/us |     q    | clk | ie | oe |     q    | # NOTE: input and output are tied together
 |     0   | 11111111 |  0  | 1  | 0  | ???????? |
-|    20   | 11111111 |  1  | 1  | 0  | ???????? | # latch input
-|    40   | 00000000 |  1  | 0  | 1  | 11111111 | # enable output
-|    60   | 00000000 |  0  | 0  | 0  | ???????? | # disable output (may leave the output floating momentarily)
-|    80   | 10101010 |  1  | 1  | 0  | ???????? | # enable input and latch
-|   100   | 00000000 |  1  | 0  | 1  | 10101010 | # enable output
-|   120   | 11111111 |  0  | 0  | 0  | ???????? | # disable both input and output
-|   140   | 11111111 |  1  | 0  | 0  | ???????? |
-|   160   | 11111111 |  0  | 1  | 0  | ???????? | # enable input again
-|   180   | 11111111 |  1  | 1  | 0  | ???????? | # latch input
-|   200   | 11111111 |  1  | 0  | 1  | 11111111 | # enable output
+|    30   | 11111111 |  1  | 1  | 0  | ???????? | # latch input
+|    60   | 00000000 |  1  | 0  | 1  | 11111111 | # enable output
+|    90   | 10101010 |  0  | 0  | 0  | ???????? | # disable output (may leave the output floating momentarily)
+|   180   | 10101010 |  1  | 1  | 0  | ???????? | # enable input and latch
+|   210   | 00000000 |  1  | 0  | 1  | 10101010 | # enable output
+|   240   | 11111111 |  0  | 0  | 0  | ???????? | # disable both input and output
+|   270   | 11111111 |  1  | 0  | 0  | ???????? |
+|   300   | 11111111 |  0  | 1  | 0  | ???????? | # enable input again
+|   360   | 11111111 |  1  | 1  | 0  | ???????? | # latch input
+|   450   | 00000000 |  1  | 0  | 1  | 11111111 | # enable output

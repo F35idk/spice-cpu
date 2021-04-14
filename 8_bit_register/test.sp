@@ -24,6 +24,6 @@ r6 nq2 n018 100k
 r7 nq1 n019 100k
 r8 nq0 n020 100k
 
-.tran 1ns 201us
+.tran 10ns 490us
 .end
 
