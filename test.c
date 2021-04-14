@@ -497,15 +497,15 @@ main(void)
     //                         "nd12", "nd13", "nd14",
     //                         "nd15", NULL });
 
-    // test_sequential("ram/test.sp", "ram/ram.cmp",
-    //      (const char *[]) { "va3", "va2", "va1",
-    //                         "va0", "vd7", "vd6",
-    //                         "vd5", "vd4", "vd3",
-    //                         "vd2", "vd1", "vd0",
-    //                         "vclk", "vwe", "vcs", NULL },
-    //      (const char *[]) { "nd7", "nd6", "nd5",
-    //                         "nd4", "nd3", "nd2",
-    //                         "nd1", "nd0", NULL });
+    test_sequential("sram/test.sp", "sram/sram.cmp",
+         (const char *[]) { "va3", "va2", "va1",
+                            "va0", "vd7", "vd6",
+                            "vd5", "vd4", "vd3",
+                            "vd2", "vd1", "vd0",
+                            "vclk", "vwe", "vcs", NULL },
+         (const char *[]) { "nd7", "nd6", "nd5",
+                            "nd4", "nd3", "nd2",
+                            "nd1", "nd0", NULL });
 
     return 0;
 }
