@@ -28,7 +28,7 @@ r6 nd2 n022 100k
 r7 nd1 n023 100k
 r8 nd0 n024 100k
 
-.tran 30ns 141u
+.tran 30ns 161u
 .option itl1=300
 .end
 
