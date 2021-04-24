@@ -507,5 +507,13 @@ main(void)
                             "nd4", "nd3", "nd2",
                             "nd1", "nd0", NULL });
 
+    test_sequential("program_counter/test.sp",
+         "program_counter/program_counter.cmp",
+         (const char *[]) { "vd3", "vd2", "vd1",
+                            "vd0", "voe", "vce",
+                            "vie", "vclk", NULL },
+         (const char *[]) { "nd3", "nd2",
+                            "nd1", "nd0", NULL });
+
     return 0;
 }
