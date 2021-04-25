@@ -1,15 +1,11 @@
 * 16-byte rom subcircuit
 
+.include ../transmission_gate/transmission_gate.inc
 .include ../not/not.inc
 .include ../buffer/buffer.inc
 .include ../nand/nand.inc
 .include ../1_to_4_not/1_to_4_not.inc
 .include ../4_to_16_decoder/4_to_16_decoder.inc
-
-.subckt transmission_gate e in ~e out vdd vss
-xx1 out ~e in vdd pmos_4t
-xx2 in e out vss nmos_4t
-.ends transmission_gate
 
 .subckt 8_bit_tri_state_buffer ~e in0 in1 in2 in3 in4 in5 in6 in7 out0 out1 out2 out3 out4 out5 out6 out7 vdd vss
 xx1 e0 in0 ~e0 out0 vdd vss transmission_gate
