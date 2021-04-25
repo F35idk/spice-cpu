@@ -3,6 +3,7 @@
 .include ../not/not.inc
 .include ../buffer/buffer.inc
 .include ../nand/nand.inc
+.include ../1_to_4_not/1_to_4_not.inc
 .include ../4_to_16_decoder/4_to_16_decoder.inc
 
 .subckt transmission_gate e in ~e out vdd vss
@@ -25,13 +26,6 @@ xx10 n001 ~e0 vss vdd not
 xx11 n001 ~e1 vss vdd not
 xx13 n001 e1 vss vdd buffer
 .ends 8_bit_tri_state_buffer
-
-.subckt 1_to_4_not in out0 out1 out2 out3 vss vdd
-xx1 in out0 vss vdd not
-xx2 in out1 vss vdd not
-xx3 in out2 vss vdd not
-xx4 in out3 vss vdd not
-.ends 1_to_4_not
 
 .subckt rom a0 a1 a2 a3 ~cs d0 d1 d2 d3 d4 d5 d6 d7 vdd vss
 xx1 a0 a1 a2 a3 sel0 sel1 sel10 sel11 sel12 sel13 sel14 sel15 sel2 sel3 sel4 sel5 sel6 sel7 sel8 sel9 vdd vss 4_to_16_decoder

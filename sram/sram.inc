@@ -1,6 +1,8 @@
 * 16 byte sram subcircuit
 
 .incluce ../device_models.inc
+.include ../1_to_4_not/1_to_4_not.inc
+.include ../1_to_4_buffer/1_to_4_buffer.inc
 .include ../not/not.inc
 .include ../buffer/buffer.inc
 .include ../nand/nand.inc
@@ -8,20 +10,6 @@
 .include ../sr_latch/sr_latch.inc
 .include ../edge_detector/edge_detector.inc
 .include ../4_to_16_decoder/4_to_16_decoder.inc
-
-.subckt 1_to_4_not in out0 out1 out2 out3 vss vdd
-xx1 in out0 vss vdd not
-xx2 in out1 vss vdd not
-xx3 in out2 vss vdd not
-xx4 in out3 vss vdd not
-.ends 1_to_4_not
-
-.subckt 1_to_4_buffer in out0 out1 out2 out3 vss vdd
-xx1 in out0 vss vdd buffer
-xx2 in out1 vss vdd buffer
-xx3 in out2 vss vdd buffer
-xx4 in out3 vss vdd buffer
-.ends 1_to_4_buffer
 
 .subckt transmission_gate e in ~e out vdd vss
 xx1 out ~e in vdd pmos_4t
