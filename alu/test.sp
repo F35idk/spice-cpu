@@ -4,14 +4,14 @@
 
 vny n031 0 5
 vnx n028 0 5
-vzy n030 0 5
+v~zy n030 0 5
 vf n032 0 5
 vcin n033 0 0
 vy5 n021 0 5
 vy3 n017 0 5
 vy4 n019 0 5
 vy6 n023 0 5
-vzx n026 0 0
+v~zx n026 0 0
 vy1 n013 0 5
 vx7 n009 0 0
 vy0 n011 0 5
