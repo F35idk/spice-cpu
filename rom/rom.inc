@@ -36,36 +36,36 @@ xx4 in out3 vss vdd not
 .subckt rom a0 a1 a2 a3 ~cs d0 d1 d2 d3 d4 d5 d6 d7 vdd vss
 xx1 a0 a1 a2 a3 sel0 sel1 sel10 sel11 sel12 sel13 sel14 sel15 sel2 sel3 sel4 sel5 sel6 sel7 sel8 sel9 vdd vss 4_to_16_decoder
 xx4 sel0 cs3 vdd vss n001 nand
-xxbyte0 n001 vss vdd vdd vdd vss vss vdd vdd d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte0 n001 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx2 sel1 cs3 vdd vss n005 nand
-xxbyte1 n005 vdd vss vdd vss vdd vss vdd vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte1 n005 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx6 sel2 cs3 vdd vss n009 nand
-xxbyte2 n009 vdd vss vss vss vdd vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte2 n009 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx8 sel3 cs3 vdd vss n013 nand
-xxbyte3 n013 vdd vdd vdd vdd vdd vdd vdd vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte3 n013 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx10 sel4 cs7 vdd vss n002 nand
-xxbyte4 n002 vdd vdd vss vdd vdd vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte4 n002 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx12 sel5 cs7 vdd vss n006 nand
-xxbyte5 n006 vss vss vss vdd vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte5 n006 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx15 sel6 cs7 vdd vss n010 nand
-xxbyte6 n010 vdd vdd vss vdd vss vdd vdd vdd d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte6 n010 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx17 sel7 cs7 vdd vss n014 nand
-xxbyte7 n014 vss vss vss vss vss vdd vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte7 n014 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx19 sel8 cs11 vdd vss n003 nand
-xxbyte8 n003 vss vdd vdd vdd vss vdd vss vdd d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte8 n003 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx21 sel9 cs11 vdd vss n007 nand
-xxbyte9 n007 vdd vdd vdd vdd vdd vdd vdd vdd d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte9 n007 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx23 sel10 cs11 vdd vss n011 nand
-xxbyte10 n011 vss vss vdd vdd vdd vdd vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte10 n011 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx25 sel11 cs11 vdd vss n015 nand
-xxbyte11 n015 vdd vss vss vss vdd vdd vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte11 n015 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx27 sel12 cs15 vdd vss n004 nand
-xxbyte12 n004 vdd vdd vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte12 n004 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx29 sel13 cs15 vdd vss n008 nand
-xxbyte13 n008 vdd vdd vdd vdd vdd vss vss vdd d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte13 n008 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx31 sel14 cs15 vdd vss n012 nand
-xxbyte14 n012 vdd vss vdd vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte14 n012 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx33 sel15 cs15 vdd vss n016 nand
-xxbyte15 n016 vss vss vss vss vdd vss vss vdd d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
+xxbyte15 n016 vss vss vss vss vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_tri_state_buffer
 xx3 ~cs cs3 cs7 cs11 cs15 vss vdd 1_to_4_not
 .ends rom
