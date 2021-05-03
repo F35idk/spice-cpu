@@ -14,16 +14,16 @@ r2 q vss 400k
 .ends tri_state_d_latch
 
 * block symbol definitions
-.subckt 8_bit_register clk ie oe q0 q1 q2 q3 q4 q5 q6 q7 vdd vss
+.subckt 8_bit_register clk ie oe d0 d1 d2 d3 d4 d5 d6 d7 vdd vss
 xx9 clk n004 vdd vss edge_detector
-xx1 q0 n001 oe q0 vdd vss tri_state_d_latch
-xx2 q1 n001 oe q1 vdd vss tri_state_d_latch
-xx3 q2 n002 oe q2 vdd vss tri_state_d_latch
-xx4 q3 n002 oe q3 vdd vss tri_state_d_latch
-xx5 q4 n005 oe q4 vdd vss tri_state_d_latch
-xx6 q5 n005 oe q5 vdd vss tri_state_d_latch
-xx7 q6 n006 oe q6 vdd vss tri_state_d_latch
-xx8 q7 n006 oe q7 vdd vss tri_state_d_latch
+xx1 d0 n001 oe d0 vdd vss tri_state_d_latch
+xx2 d1 n001 oe d1 vdd vss tri_state_d_latch
+xx3 d2 n002 oe d2 vdd vss tri_state_d_latch
+xx4 d3 n002 oe d3 vdd vss tri_state_d_latch
+xx5 d4 n005 oe d4 vdd vss tri_state_d_latch
+xx6 d5 n005 oe d5 vdd vss tri_state_d_latch
+xx7 d6 n006 oe d6 vdd vss tri_state_d_latch
+xx8 d7 n006 oe d7 vdd vss tri_state_d_latch
 xx10 ie n004 vdd vss n003 nand
 xx15 n003 n001 n002 n005 n006 vss vdd 1_to_4_not
 .ends 8_bit_register

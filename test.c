@@ -524,13 +524,13 @@ main(void)
 
     test_sequential("8_bit_register/test.sp",
          "8_bit_register/8_bit_register.cmp",
-         (const char *[]) { "vq7", "vq6", "vq5",
-                            "vq4", "vq3", "vq2",
-                            "vq1", "vq0", "vclk",
+         (const char *[]) { "vd7", "vd6", "vd5",
+                            "vd4", "vd3", "vd2",
+                            "vd1", "vd0", "vclk",
                             "vie", "voe", NULL },
-         (const char *[]) { "nq7", "nq6", "nq5",
-                            "nq4", "nq3", "nq2",
-                            "nq1", "nq0", NULL });
+         (const char *[]) { "nd7", "nd6", "nd5",
+                            "nd4", "nd3", "nd2",
+                            "nd1", "nd0", NULL });
 
     test_combinational("4_to_16_decoder/test.sp",
          "4_to_16_decoder/4_to_16_decoder.cmp",

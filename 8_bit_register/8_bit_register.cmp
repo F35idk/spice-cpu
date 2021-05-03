@@ -1,4 +1,4 @@
-| time/us |     q    | clk | ie | oe |     q    | # NOTE: input and output are tied together
+| time/us |     d    | clk | ie | oe |     d    | # NOTE: input and output are tied together
 |     0   | 11111111 |  0  | 1  | 0  | ???????? |
 |    30   | 11111111 |  1  | 1  | 0  | ???????? | # latch input
 |    60   | 00000000 |  1  | 0  | 1  | 11111111 | # enable output
