@@ -6,9 +6,9 @@
 .include ../not/not.inc
 
 .subckt tri_state_buffer in out vss vdd e
-m3 out n001 vdd vdd fds4885c_p
-m4 out n002 vss vss si4820dy
 xx1 in e vdd vss n001 nand
-xx2 in n003 vdd vss n002 nor
-xx3 e n003 vss vdd not
+xx2 in n005 vdd vss n003 nor
+xx3 e n005 vss vdd not
+xx4 out n001 vdd n002 pmos_4t
+xx5 out n003 vss n004 nmos_4t
 .ends tri_state_buffer
