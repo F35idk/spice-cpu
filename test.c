@@ -496,11 +496,11 @@ main(void)
                             "vy5", "vy4", "vy3", "vy2", "vy1",
                             "vy0", "v~zx", "vnx", "v~zy", "vny",
                             "vf", "vnout", NULL },
-         (const char *[]) { "nout7", "nout6", "nout5",
-                            "nout4", "nout3", "nout2",
-                            // NOTE: 'nout7' (the 8th bit of the output)
+         (const char *[]) { "nq7", "nq6", "nq5",
+                            "nq4", "nq3", "nq2",
+                            // NOTE: 'nq7' (the 8th bit of the output)
                             // is used as the ALU negative flag
-                            "nout1", "nout0", "nzr", "nout7", NULL });
+                            "nq1", "nq0", "nzr", "nq7", NULL });
 
     test_sequential("sr_latch/test.sp",
          "sr_latch/sr_latch.cmp",
