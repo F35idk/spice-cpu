@@ -1,26 +1,25 @@
-| time/us |  d   | oe | ce | ie | clk |  d   |
-|     0   | 0000 | 0  | 0  | 1  |  1  | ???? | # set program counter to all zeroes
-|     5   | 0000 | 0  | 0  | 1  |  0  | ???? |
-|    10   | 0000 | 1  | 0  | 0  |  1  | 0000 | # .. on rising edge
-|    15   | 0000 | 1  | 1  | 0  |  0  | 0000 | # then enable counting
-|    20   | 0000 | 1  | 1  | 0  |  1  | 0001 | # and start counting on rising edge
-|    25   | 0000 | 1  | 1  | 0  |  0  | 0001 |
-|    30   | 0000 | 1  | 1  | 0  |  1  | 0010 |
-|    35   | 0000 | 1  | 1  | 0  |  0  | 0010 |
-|    40   | 0000 | 1  | 1  | 0  |  1  | 0011 |
-|    45   | 0000 | 1  | 1  | 0  |  0  | 0011 |
-|    50   | 0000 | 1  | 1  | 0  |  1  | 0100 |
-|    55   | 0000 | 1  | 1  | 0  |  0  | 0100 |
-|    60   | 0000 | 1  | 1  | 0  |  1  | 0101 |
-|    65   | 0000 | 1  | 1  | 0  |  0  | 0101 |
-|    70   | 0000 | 1  | 1  | 0  |  1  | 0110 |
-|    75   | 0000 | 1  | 1  | 0  |  0  | 0110 |
-|    80   | 0000 | 1  | 1  | 0  |  1  | 0111 |
-|    85   | 0000 | 1  | 1  | 0  |  0  | 0111 |
-|    90   | 0000 | 1  | 1  | 0  |  1  | 1000 |
-|    95   | 1111 | 0  | 0  | 1  |  0  | ???? | # set program counter to all ones
-|   100   | 1111 | 0  | 0  | 1  |  1  | ???? | # .. on rising edge
-|   105   | 0000 | 1  | 0  | 0  |  0  | 1111 |
-|   110   | 0000 | 1  | 0  | 0  |  1  | 1111 |
-|   115   | 0000 | 1  | 1  | 0  |  0  | 1111 | # enable counting again
-|   120   | 0000 | 1  | 1  | 0  |  1  | 0000 | # .. and start counting on rising edge (wrapping around to all zeroes)
+| time/us |  d   | oe | ce | ie | clk |  d   | # NOTE: enabling ie when clk is high causes a rising edge to be passed to the counter (due to clock gating stuff)
+|     0   | 0000 | 0  | 0  | 1  |  0  | ???? | # set program counter to all zeroes
+|     5   | 0000 | 0  | 0  | 1  |  1  | ???? | # .. on rising edge
+|    10   | 0000 | 1  | 1  | 0  |  0  | 0000 | # then enable counting
+|    15   | 0000 | 1  | 1  | 0  |  1  | 0001 | # and start counting on rising edge
+|    20   | 0000 | 1  | 1  | 0  |  0  | 0001 | # NOTE: for the counter to start counting, ce should be asserted on the low side of the clock. enabling ce on the rising edge itself won't initiate counting. this is an artifact of the underlying jk-flip-flops used to build the counter.
+|    25   | 0000 | 1  | 1  | 0  |  1  | 0010 |
+|    30   | 0000 | 1  | 1  | 0  |  0  | 0010 |
+|    35   | 0000 | 1  | 1  | 0  |  1  | 0011 |
+|    40   | 0000 | 1  | 1  | 0  |  0  | 0011 |
+|    45   | 0000 | 1  | 1  | 0  |  1  | 0100 |
+|    50   | 0000 | 1  | 1  | 0  |  0  | 0100 |
+|    55   | 0000 | 1  | 1  | 0  |  1  | 0101 |
+|    60   | 0000 | 1  | 1  | 0  |  0  | 0101 |
+|    65   | 0000 | 1  | 1  | 0  |  1  | 0110 |
+|    70   | 0000 | 1  | 1  | 0  |  0  | 0110 |
+|    75   | 0000 | 1  | 1  | 0  |  1  | 0111 |
+|    80   | 0000 | 1  | 1  | 0  |  0  | 0111 |
+|    85   | 0000 | 1  | 1  | 0  |  1  | 1000 |
+|    90   | 1111 | 0  | 0  | 1  |  0  | ???? | # set program counter to all ones
+|    95   | 1111 | 0  | 0  | 1  |  1  | ???? | # .. on rising edge
+|   100   | 0000 | 1  | 0  | 0  |  0  | 1111 |
+|   105   | 0000 | 1  | 0  | 0  |  1  | 1111 |
+|   110   | 0000 | 1  | 1  | 0  |  0  | 1111 | # enable counting again
+|   115   | 0000 | 1  | 1  | 0  |  1  | 0000 | # .. and start counting on rising edge (wrapping around to all zeroes)

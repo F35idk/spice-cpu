@@ -17,6 +17,6 @@ vd2 n010 0 0
 vd1 n011 0 0
 vd0 n012 0 0
 
-.tran 10ns 125u
+.tran 10ns 120u
 .option itl1=300
 .end
