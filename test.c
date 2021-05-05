@@ -548,7 +548,7 @@ main(void)
                             "va0", "vd7", "vd6",
                             "vd5", "vd4", "vd3",
                             "vd2", "vd1", "vd0",
-                            "vclk", "vwe", "vcs", NULL },
+                            "vclk", "vwe", "voe", NULL },
          (const char *[]) { "nd7", "nd6", "nd5",
                             "nd4", "nd3", "nd2",
                             "nd1", "nd0", NULL });

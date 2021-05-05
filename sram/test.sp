@@ -11,7 +11,7 @@ va2 n007 0 5
 va3 n009 0 5
 vclk n015 0 5
 vwe n011 0 5
-vcs n013 0 5
+voe n013 0 5
 xx1 n003 n005 n007 n009 n015 n013 n011 nd0 nd1 nd2 nd3 nd4 nd5 nd6 nd7 n001 0 sram
 vd1 n023 0 5
 vd2 n022 0 5
