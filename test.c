@@ -495,7 +495,7 @@ main(void)
                             "vx2", "vx1", "vx0", "vy7", "vy6",
                             "vy5", "vy4", "vy3", "vy2", "vy1",
                             "vy0", "v~zx", "vnx", "v~zy", "vny",
-                            "vf", "vnout", NULL },
+                            "vf", "vnout", "v~oe", NULL },
          (const char *[]) { "nq7", "nq6", "nq5",
                             "nq4", "nq3", "nq2",
                             // NOTE: 'nq7' (the 8th bit of the output)
