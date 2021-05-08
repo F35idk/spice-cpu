@@ -527,7 +527,7 @@ main(void)
          (const char *[]) { "vd7", "vd6", "vd5",
                             "vd4", "vd3", "vd2",
                             "vd1", "vd0", "vclk",
-                            "vie", "voe", NULL },
+                            "vie", "v~oe", NULL },
          (const char *[]) { "nq7", "nq6", "nq5",
                             "nq4", "nq3", "nq2",
                             "nq1", "nq0", "nd7",
