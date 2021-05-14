@@ -3,7 +3,7 @@
 |     5   | 0000 | 0  | 0  | 1  |  1  | ???? | # .. on rising edge
 |    10   | 0000 | 1  | 1  | 0  |  0  | 0000 | # then enable counting
 |    15   | 0000 | 1  | 1  | 0  |  1  | 0001 | # and start counting on rising edge
-|    20   | 0000 | 1  | 1  | 0  |  0  | 0001 | # NOTE: for the counter to start counting, ce should be asserted on the low side of the clock. enabling ce on the rising edge itself won't initiate counting. this is an artifact of the underlying jk-flip-flops used to build the counter.
+|    20   | 0000 | 1  | 1  | 0  |  0  | 0001 |
 |    25   | 0000 | 1  | 1  | 0  |  1  | 0010 |
 |    30   | 0000 | 1  | 1  | 0  |  0  | 0010 |
 |    35   | 0000 | 1  | 1  | 0  |  1  | 0011 |
