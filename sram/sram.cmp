@@ -1,8 +1,12 @@
-| time/us |   a  |     d    | clk | we | oe |     d    | # NOTE: d is both an input and an output
-|     0   | 0000 | 10101010 |  0  | 0  | 0  | ???????? |
-|    30   | 0111 | 10101010 |  1  | 1  | 0  | ???????? | # write to address 7 on rising edge
-|    60   | 0111 | 00000000 |  0  | 0  | 1  | 10101010 | # read from address 7
-|    90   | 1000 | 00000001 |  0  | 0  | 0  | ???????? |
-|   120   | 1000 | 00000001 |  1  | 1  | 0  | ???????? | # write to address 8
-|   140   | 1000 | 00000000 |  0  | 0  | 1  | 00000001 | # read from address 8
-|   160   | 0111 | 00000000 |  0  | 0  | 1  | 10101010 | # read from address 7 again
+| time/us |   a  |     d    | ~we | oe |     d    | # NOTE: d is both an input and an output
+|     0   | 0111 | 10101010 |  1  | 0  | ???????? | # assert data and address
+|     5   | 0111 | 10101010 |  0  | 0  | ???????? | # write
+|     7   | 0111 | 10101010 |  1  | 0  | ???????? | # deassert write
+|    10   | 0111 | 00000000 |  1  | 0  | ???????? | # deassert data
+|    30   | 0111 | 00000000 |  1  | 1  | 10101010 | # read
+|    50   | 1000 | 00000001 |  1  | 0  | ???????? | # assert data and address
+|    70   | 1000 | 00000001 |  0  | 0  | ???????? | # write
+|    75   | 1000 | 00000001 |  1  | 0  | ???????? | # deassert write
+|    77   | 1000 | 00000000 |  1  | 0  | ???????? | # deassert data
+|    80   | 1000 | 00000000 |  1  | 1  | 00000001 | # read from address 8
+|   100   | 0111 | 00000000 |  1  | 1  | 10101010 | # read from address 7 again
