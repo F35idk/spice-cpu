@@ -32,5 +32,5 @@ r14 nq5 0 100k
 r15 nq6 0 100k
 r16 nq7 0 100k
 
-.tran 10ns 490us
+.tran 10ns 280us
 .end
