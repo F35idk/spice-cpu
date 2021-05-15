@@ -509,7 +509,7 @@ main(void)
 
     test_sequential("d_latch/test.sp",
          "d_latch/d_latch.cmp",
-         (const char *[]) { "vd", "ve", NULL },
+         (const char *[]) { "vd", "v~e", NULL },
          (const char *[]) { "nq", NULL });
 
     test_sequential("d_flip_flop/test.sp",

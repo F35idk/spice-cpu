@@ -4,9 +4,9 @@
 .include ../and/and.inc
 .include ../not/not.inc
 
-.subckt d_latch d e nq q vdd vss
-xx1 n002 n003 nq q vdd vss sr_latch
-xx2 e d vdd vss n003 and
-xx3 n001 e vdd vss n002 and
-xx4 d n001 vss vdd not
+.subckt d_latch d ~e nq q vdd vss
+xx1 n001 n002 nq q vdd vss sr_latch
+xx4 d n003 vss vdd not
+xx2 d ~e vdd vss n001 nor
+xx3 ~e n003 vdd vss n002 nor
 .ends d_latch
