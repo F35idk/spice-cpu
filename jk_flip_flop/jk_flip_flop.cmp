@@ -1,5 +1,5 @@
 | time/us | j | k | clk | q |
-|     0   | 0 | 0 |  0  | ? |
+|     0   | 0 | 0 |  0  | ? | # do nothing the first half cycle to ensure that the contents of the internal master sr-latch propagate into the slave latch. this prevents the output from unexpectedly changing whenever the flip-flop is first set
 |    20   | 0 | 1 |  1  | ? |
 |    40   | 0 | 1 |  0  | 0 | # latch on falling edge
 |    60   | 1 | 1 |  1  | 0 |
