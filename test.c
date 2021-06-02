@@ -564,9 +564,9 @@ main(void)
          (const char *[]) { "nd3", "nd2",
                             "nd1", "nd0", NULL });
 
-    test_sequential("2_bit_counter/test.sp",
-         "2_bit_counter/2_bit_counter.cmp",
-         (const char *[]) { "v~clk", "v~rst", NULL },
+    test_sequential("mod_3_counter/test.sp",
+         "mod_3_counter/mod_3_counter.cmp",
+         (const char *[]) { "v~clk", "vrst", NULL },
          (const char *[]) { "nq1", "nq0", NULL });
 
     return 0;
