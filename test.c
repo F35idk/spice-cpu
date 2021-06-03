@@ -560,7 +560,7 @@ main(void)
          "program_counter/program_counter.cmp",
          (const char *[]) { "vd3", "vd2", "vd1",
                             "vd0", "voe", "vce",
-                            "vie", "vclk", NULL },
+                            "vie", "vrst", "vclk", NULL },
          (const char *[]) { "nd3", "nd2",
                             "nd1", "nd0", NULL });
 
