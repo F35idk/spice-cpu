@@ -523,5 +523,19 @@ main(void)
          (const char *[]) { "v~clk", "vrst", NULL },
          (const char *[]) { "nq1", "nq0", NULL });
 
+    test_sequential("control_unit/test.sp",
+         "control_unit/control_unit.cmp",
+         (const char *[]) { "vclk", "vrst", "vi7",
+                            "vi6", "vi5", "vi4", NULL },
+         (const char *[]) { "n~alu_out", "n~carry",
+                            "nadd", "nbranch_zr",
+                            "ncount_enable", "nflags_in",
+                            "nir_in", "n~ir_out", "nmar_in",
+                            "nnot_out", "nnot_x", "nnot_y",
+                            "npc_in", "npc_out", "n~ram_in",
+                            "nram_out", "n~rom_out", "nx_in",
+                            "n~x_out", "ny_in", "n~y_out",
+                            "nbranch_carry", NULL });
+
     return 0;
 }
