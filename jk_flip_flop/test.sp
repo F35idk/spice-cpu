@@ -10,6 +10,6 @@ vclk n006 0 5
 r1 nq 0 100k
 r2 n005 0 100k
 
-.tran 1ns 201u
+.tran 1ns 300u
 .option rshunt=1e12
 .end
