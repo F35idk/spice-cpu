@@ -8,25 +8,25 @@
 .include ../1_to_4_buffer/1_to_4_buffer.inc
 .include ../3_way_nand/3_way_nand.inc
 
-.subckt program_counter clk oe ce ie d0 d1 d2 d3 vdd vss rst
-xx35 out0 d0 vss vdd oe tri_state_buffer
-xx36 out1 d1 vss vdd oe tri_state_buffer
-xx37 out2 d2 vss vdd oe tri_state_buffer
-xx38 out3 d3 vss vdd oe tri_state_buffer
-xx1 n017 n009 n020 n023 out0 vdd vss jk_flip_flop
-xx5 n017 n007 n014 n015 out1 vdd vss jk_flip_flop
+.subckt program_counter clk oe ce ie d0 d1 d2 d3 vdd vss rst q0 q1 q2 q3
+xx35 q0 d0 vss vdd oe tri_state_buffer
+xx36 q1 d1 vss vdd oe tri_state_buffer
+xx37 q2 d2 vss vdd oe tri_state_buffer
+xx38 q3 d3 vss vdd oe tri_state_buffer
+xx1 n017 n009 n020 n023 q0 vdd vss jk_flip_flop
+xx5 n017 n007 n014 n015 q1 vdd vss jk_flip_flop
 r5 n015 vss 100k
 r1 n023 vss 100k
-xx7 n022 n005 n025 n027 out2 vdd vss jk_flip_flop
+xx7 n022 n005 n025 n027 q2 vdd vss jk_flip_flop
 r3 n027 vss 100k
-xx20 out0 out1 vdd vss n001 and
-xx15 n001 out2 vdd vss n024 and
-xx21 n022 n010 n018 n019 out3 vdd vss jk_flip_flop
+xx20 q0 q1 vdd vss n001 and
+xx15 n001 q2 vdd vss n024 and
+xx21 n022 n010 n018 n019 q3 vdd vss jk_flip_flop
 r2 n019 vss 100k
 xx22 clk n017 vss vdd not
 xx4 n003 ie0 vdd vss n016 nand
 xx27 n007 ce0 vdd vss n029 nand
-xx28 ce0 out0 vdd vss n008 nand
+xx28 ce0 q0 vdd vss n008 nand
 xx30 ie0 d1 vdd vss n003 nand
 xx3 ce ~ce vss vdd not
 xx2 ~ce ce0 vss vdd not
