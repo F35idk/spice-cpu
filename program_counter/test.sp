@@ -22,6 +22,6 @@ r6 nq1 0 100k
 r7 nq2 0 100k
 r8 nq3 0 100k
 
-.tran 10ns 165u
+.tran 10ns 150u
 .option itl1=300
 .end
