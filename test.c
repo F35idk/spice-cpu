@@ -537,5 +537,10 @@ main(void)
                             "n~x_out", "ny_in", "n~y_out",
                             "nbranch_carry", NULL });
 
+    test_sequential("dt_flip_flop/test.sp",
+         "dt_flip_flop/dt_flip_flop.cmp",
+         (const char *[]) { "vclk", "vd", "v~t", "v~ie", NULL },
+         (const char *[]) { "nq", NULL });
+
     return 0;
 }
