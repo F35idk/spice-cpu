@@ -10,23 +10,6 @@
 #include <sys/mman.h>
 #include "util.h"
 
-static int
-ngspice_output_callback(
-    char *output_str,
-    int id,
-    void *user_data
-)
-{
-    if (strstr(output_str, "stderr")) {
-        fprintf(stderr, "ngspice error: '%s'\n", &output_str[7]);
-
-        if (strstr(output_str, "Simulation interrupted due to error!"))
-            exit(1);
-    }
-
-    return 0;
-}
-
 static void
 init_test(
     // the path to the SPICE netlist

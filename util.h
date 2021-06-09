@@ -21,6 +21,25 @@ ngspice_exit_callback(
     return 0;
 }
 
+int
+ngspice_output_callback(
+    char *output_str,
+    int id,
+    void *user_data
+)
+{
+    if (strstr(output_str, "stderr")) {
+        fprintf(stderr, "ngspice error: '%s'\n", &output_str[7]);
+        fflush(stderr);
+
+        if (strstr(output_str, "Simulation interrupted due to error!")
+            || strstr(output_str, "simulation aborted"))
+            exit(1);
+    }
+
+    return 0;
+}
+
 float
 get_ngspice_vector_voltage(const char *vector_name)
 {
