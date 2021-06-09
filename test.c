@@ -50,32 +50,6 @@ init_test(
     }
 }
 
-// sends a command to ngspice to alter 'device' with the given 'value'
-static void
-send_ngspice_alter_cmd(
-    const char *device_name,
-    const char value
-)
-{
-    int cmd_len = 10 + strlen(device_name) + 1;
-    char *alter_cmd = calloc(1, cmd_len);
-
-    // format the 'alter' command to set the right device parameter and value
-    snprintf(alter_cmd, cmd_len, "alter %s = %c", device_name, value);
-
-    // send the alter command to ngspice
-    int error = ngSpice_Command(alter_cmd);
-    printf("setting %s = %cV\n", device_name, value);
-
-    if (error) {
-        printf("error when sending command: '%s' - check stderr\n", alter_cmd);
-        free(alter_cmd);
-        exit(1);
-    }
-
-    free(alter_cmd);
-}
-
 static void
 assert_correct_voltage(
     float voltage,
