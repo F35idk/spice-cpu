@@ -1,6 +1,6 @@
 
 #include <stdio.h>
-#include "write_rom.h"
+#include "util.h"
 
 typedef enum {
     ALU_OUT      = 0x1,

@@ -8,18 +8,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/mman.h>
-
-static int
-ngspice_exit_callback(
-    int exit_status,
-    bool unload_immediately,
-    bool exit_on_quit,
-    int id,
-    void *user_data
-)
-{
-    return 0;
-}
+#include "util.h"
 
 static int
 ngspice_output_callback(
@@ -102,25 +91,6 @@ send_ngspice_alter_cmd(
     }
 
     free(alter_cmd);
-}
-
-static float
-get_ngspice_vector_voltage(const char *vector_name)
-{
-    vector_info *info;
-    float voltage;
-
-    info = ngGet_Vec_Info(vector_name);
-    assert(info);
-
-    if (!info->v_length) {
-        printf("error: output vector '%s' has length zero - check stderr\n",
-               info->v_name);
-        exit(1);
-    }
-
-    voltage = info->v_realdata[info->v_length - 1];
-    return voltage;
 }
 
 static void
