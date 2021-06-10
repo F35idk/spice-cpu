@@ -34,20 +34,11 @@ init_test(
     char *source_cmd = calloc(1, cmd_len);
     snprintf(source_cmd, cmd_len, "source %s", netlist_path);
     // send command to open netlist file
-    int error = ngSpice_Command(source_cmd);
+    send_ngspice_cmd(source_cmd);
     free(source_cmd);
 
-    if (error) {
-        printf("error when sending command: '%s' - check stderr\n", source_cmd);
-        exit(1);
-    }
-
     // delete all previous breakpoints
-    error = ngSpice_Command("delete all");
-    if (error) {
-        puts("error when sending command: 'delete all' - check stderr");
-        exit(1);
-    }
+    send_ngspice_cmd("delete all");
 }
 
 static void
@@ -122,11 +113,7 @@ test_combinational(
         assert(cmp_file[cmp_file_pos] != '\n');
 
         // simulate
-        int error = ngSpice_Command("run");
-        if (error) {
-            puts("error when sending command: 'run' - check stderr");
-            exit(1);
-        }
+        send_ngspice_cmd("run");
 
         // loop over every logic output value in the current
         // row of the cmp file (until end of row is reached)
@@ -186,13 +173,8 @@ test_sequential(
         char *break_cmd = calloc(1, cmd_len);
         snprintf(break_cmd, cmd_len, "stop when time = %fus", time);
         // send a command to set a breakpoint at this time
-        int error = ngSpice_Command(break_cmd);
+        send_ngspice_cmd(break_cmd);
         free(break_cmd);
-
-        if (error) {
-            printf("error when sending command: '%s' - check stderr\n", break_cmd);
-            exit(1);
-        }
 
         cmp_file_pos = (int) (new_cmp_file_pos - &cmp_file[0]);
 
@@ -211,11 +193,7 @@ test_sequential(
     // TODO: realloc for good measure
 
     // run until the first breakpoint is hit
-    int error = ngSpice_Command("run");
-    if (error) {
-        puts("error when sending command: 'run' - check stderr");
-        exit(1);
-    }
+    send_ngspice_cmd("run");
 
     for (int i = 0; i < input_output_len;) {
         // loop over input values and set the corresponding input voltages
@@ -224,11 +202,7 @@ test_sequential(
             send_ngspice_alter_cmd(spice_input_labels[j], input_voltage);
         }
 
-        error = ngSpice_Command("resume");
-        if (error) {
-            puts("error when sending command: 'resume' - check stderr");
-            exit(1);
-        }
+        send_ngspice_cmd("resume");
 
         // loop over output values and test the corresponding output voltages
         for (int j = 0; spice_output_labels[j]; j++, i++) {

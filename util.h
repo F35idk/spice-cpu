@@ -4,9 +4,9 @@
 #include <sys/mman.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <ngspice/sharedspice.h>
 #include <stdbool.h>
 #include <assert.h>
+#include <ngspice/sharedspice.h>
 #include <stdlib.h>
 
 int
@@ -59,6 +59,17 @@ get_ngspice_vector_voltage(const char *vector_name)
     return voltage;
 }
 
+void
+send_ngspice_cmd(char *cmd)
+{
+    int error = ngSpice_Command(cmd);
+    if (error) {
+        printf("error when sending command: '%s' - check stderr\n", cmd);
+        // NOTE: this path 'leaks' cmd if cmd was heap-allocated
+        exit(1);
+    }
+}
+
 // sends a command to ngspice to alter 'device' with the given 'value'
 void
 send_ngspice_alter_cmd(
@@ -73,15 +84,8 @@ send_ngspice_alter_cmd(
     snprintf(alter_cmd, cmd_len, "alter %s = %c", device_name, value);
 
     // send the alter command to ngspice
-    int error = ngSpice_Command(alter_cmd);
     printf("setting %s = %cV\n", device_name, value);
-
-    if (error) {
-        printf("error when sending command: '%s' - check stderr\n", alter_cmd);
-        free(alter_cmd);
-        exit(1);
-    }
-
+    send_ngspice_cmd(alter_cmd);
     free(alter_cmd);
 }
 
