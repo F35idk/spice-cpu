@@ -6,8 +6,11 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <assert.h>
+#include <stdarg.h>
 #include <ngspice/sharedspice.h>
 #include <stdlib.h>
+
+#define INT_MAX_DIGITS 10
 
 int
 ngspice_exit_callback(
@@ -66,6 +69,23 @@ get_ngspice_vector_voltage(const char *vector_name)
     return voltage;
 }
 
+float
+get_ngspice_vector_voltage_fmt(const char *fmt_vector_name, int idx)
+{
+    int name_len;
+    char *vector_name;
+    float voltage;
+
+    name_len = snprintf(NULL, 0, fmt_vector_name, idx) + 1;
+    vector_name = calloc(1, name_len);
+    snprintf(vector_name, name_len, fmt_vector_name, idx);
+
+    voltage = get_ngspice_vector_voltage(vector_name);
+    free(vector_name);
+
+    return voltage;
+}
+
 void
 send_ngspice_cmd(char *cmd)
 {
@@ -75,6 +95,19 @@ send_ngspice_cmd(char *cmd)
         // NOTE: this path 'leaks' cmd if cmd was heap-allocated
         exit(1);
     }
+}
+
+// sets a breakpoint in the ngpsice simulation at t = 'time_us' microseconds
+void
+set_ngspice_breakpoint_in_us(int time_us)
+{
+    // calculate maximum length of command at compile-time
+    #define CMD_LEN sizeof("stop when time = us") - 1 + INT_MAX_DIGITS + 1
+    char break_cmd[CMD_LEN];
+
+    snprintf(break_cmd, CMD_LEN, "stop when time = %ius", time_us);
+    send_ngspice_cmd(break_cmd);
+    #undef CMD_LEN
 }
 
 // sends a command to ngspice to alter 'device' with the given 'value'
