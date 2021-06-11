@@ -8,6 +8,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/mman.h>
+
+// tell the functions in 'util.h' to print debug info
+#define DEBUG
 #include "util.h"
 
 static void

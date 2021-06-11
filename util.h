@@ -29,12 +29,19 @@ ngspice_output_callback(
 )
 {
     if (strstr(output_str, "stderr")) {
+        #ifdef DEBUG
         fprintf(stderr, "ngspice error: '%s'\n", &output_str[7]);
         fflush(stderr);
+        #endif
 
         if (strstr(output_str, "Simulation interrupted due to error!")
-            || strstr(output_str, "simulation aborted"))
+            || strstr(output_str, "simulation aborted")) {
+            #ifndef DEBUG
+            fprintf(stderr, "ngspice error: '%s'\n", &output_str[7]);
+            fflush(stderr);
             exit(1);
+            #endif
+        }
     }
 
     return 0;
@@ -84,7 +91,9 @@ send_ngspice_alter_cmd(
     snprintf(alter_cmd, cmd_len, "alter %s = %c", device_name, value);
 
     // send the alter command to ngspice
+    #ifdef DEBUG
     printf("setting %s = %cV\n", device_name, value);
+    #endif
     send_ngspice_cmd(alter_cmd);
     free(alter_cmd);
 }
