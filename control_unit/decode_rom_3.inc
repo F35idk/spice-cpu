@@ -36,7 +36,7 @@ xxbyte12 n004 vss vdd vss vdd vss vdd vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_
 xx29 sel13 cs15 vdd vss n008 nand
 xxbyte13 n008 vss vdd vss vdd vss vdd vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_transmission_gate
 xx31 sel14 cs15 vdd vss n012 nand
-xxbyte14 n012 vss vdd vss vdd vss vdd vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_transmission_gate
+xxbyte14 n012 vss vdd vss vdd vss vss vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_transmission_gate
 xx33 sel15 cs15 vdd vss n016 nand
 xxbyte15 n016 vss vdd vss vdd vss vdd vss vss d0 d1 d2 d3 d4 d5 d6 d7 vdd vss 8_bit_transmission_gate
 xx3 ~cs cs3 cs7 cs11 cs15 vss vdd 1_to_4_not
