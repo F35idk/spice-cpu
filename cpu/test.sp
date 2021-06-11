@@ -19,7 +19,7 @@ xx3 clk ie vdd vss n002 clock_gate
 xx4 n002 n001 vss vdd not
 .ends 2_bit_d_flip_flop
 
-* 4-bit d flip-flop used as a flags register
+* 4-bit d flip-flop used as a memory address register
 .subckt 4_bit_d_flip_flop clk d0 d1 d2 d3 ie q0 q1 q2 q3 vdd vss
 r1 n001 vss 100k
 r2 n004 vss 100k
@@ -93,3 +93,5 @@ rir4 0 nir4 200k
 rir5 0 nir5 200k
 rir6 0 nir6 200k
 rir7 0 nir7 200k
+
+.end
