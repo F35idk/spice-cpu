@@ -68,7 +68,7 @@ main(void)
         [0b1011] = ADD | NOT_Y | NOT_OUT | ALU_OUT | FLAGS_IN | Y_IN, // SUB Y, X
         [0b1100] = ADD | NOT_X | NOT_OUT | FLAGS_IN, // CMP
         [0b1101] = IR_OUT | BRANCH_ZR, // BEQ
-        [0b1110] = IR_OUT | BRANCH_CARRY, // BGE
+        [0b1110] = IR_OUT | BRANCH_CARRY, // BLT
         [0b1111] = IR_OUT | PC_IN, // JMP
     };
 
