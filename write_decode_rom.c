@@ -63,9 +63,9 @@ main(void)
         [0b0110] = ROM_OUT | X_IN, // LDROM X, $ADDR
         [0b0111] = ROM_OUT | Y_IN, // LDROM Y, $ADDR
         [0b1000] = ADD | CARRY | ALU_OUT | FLAGS_IN | X_IN, // ADC
-        [0b1001] = ADD | NOT_X | NOT_OUT | ALU_OUT | FLAGS_IN | X_IN, // SUB
+        [0b1001] = ADD | NOT_X | NOT_OUT | ALU_OUT | FLAGS_IN | X_IN, // SUB X, Y
         [0b1010] = ALU_OUT | FLAGS_IN | X_IN, // AND
-        [0b1011] = NOT_X | NOT_Y | NOT_OUT | ALU_OUT | FLAGS_IN | X_IN, // OR
+        [0b1011] = ADD | NOT_Y | NOT_OUT | ALU_OUT | FLAGS_IN | Y_IN, // SUB Y, X
         [0b1100] = ADD | NOT_X | NOT_OUT | FLAGS_IN, // CMP
         [0b1101] = IR_OUT | BRANCH_ZR, // BEQ
         [0b1110] = IR_OUT | BRANCH_CARRY, // BGE
