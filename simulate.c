@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <ngspice/sharedspice.h>
+#include "cpu_state.h"
 #include "util.h"
 
 // cpu constants
@@ -20,7 +21,7 @@ static const char *NGSPICE_ITL1 = "option itl1=300";
 // TODO: stop-condition function
 // TODO: make emulator, dump state, compare with simulated state?? allows easily testing programs
 
-static void
+static CpuState *
 simulate_cpu(int n_cycles)
 {
     // initialize ngspice
@@ -93,14 +94,9 @@ simulate_cpu(int n_cycles)
     send_ngspice_alter_cmd("vsource", '5');
     send_ngspice_cmd("resume");
 
-    for (int i = 0; i < n_cycles; i++) {
-        unsigned char x_register = 0;
-        unsigned char y_register = 0;
-        unsigned char program_counter = 0;
-        unsigned char memory_address_register = 0;
-        unsigned char instruction_register = 0;
-        unsigned char data_bus = 0;
-
+    CpuState *cpu_states = calloc(1, (n_cycles + 1) * sizeof(CpuState));
+    for (int i = 0; i <= n_cycles; i++) {
+        CpuState *state = &cpu_states[i];
         printf("~rom_out: %f\n", get_ngspice_vector_voltage("~rom_out"));
         printf("x_in: %f\n", get_ngspice_vector_voltage("x_in"));
         printf("pc_in: %f\n", get_ngspice_vector_voltage("pc_in"));
@@ -108,32 +104,44 @@ simulate_cpu(int n_cycles)
 
         for (int j = 0; j < 8; j++) {
             if (get_ngspice_vector_voltage_fmt("nx%i", j) > 4.0)
-                x_register |= (1 << j);
+                state->x |= (1 << j);
 
-            if (get_ngspice_vector_voltage_fmt("nd%i", j) > 4.0)
-                data_bus |= (1 << j);
+            if (get_ngspice_vector_voltage_fmt("ny%i", j) > 4.0)
+                state->y |= (1 << j);
 
             if (get_ngspice_vector_voltage_fmt("nir%i", j) > 4.0)
-                instruction_register |= (1 << j);
+                state->ir |= (1 << j);
         }
 
         for (int j = 0; j < 4; j++) {
             if (get_ngspice_vector_voltage_fmt("npc%i", j) > 4.0)
-                program_counter |= (1 << j);
+                state->pc |= (1 << j);
 
             if (get_ngspice_vector_voltage_fmt("nmar%i", j) > 4.0)
-                memory_address_register |= (1 << j);
+                state->mar |= (1 << j);
         }
 
-        printf("x: %x\ny: ??\npc: %x\nmar: %x\nir: %x\nd: %x\n",
-               x_register, program_counter, memory_address_register,
-               instruction_register, data_bus);
+        if (get_ngspice_vector_voltage("zero_flag") > 4.0)
+            state->zero = true;
 
-        send_ngspice_cmd("resume");
+        if (get_ngspice_vector_voltage("carry_flag") > 4.0)
+            state->carry = true;
+
+        state->current_cycle = i;
+        // FIXME: cycle became 49 on last iter???????
+
+        cpu_state_print(state);
+
+        // don't send resume cmd on last iteration (simulation is done)
+        if (i != n_cycles)
+            send_ngspice_cmd("resume");
     }
 
     char *write_cmd = "write out.raw";
     send_ngspice_cmd(write_cmd);
+
+    cpu_states[n_cycles].is_last = true;
+    return cpu_states;
 }
 
 int
