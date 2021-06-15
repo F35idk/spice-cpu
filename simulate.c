@@ -5,6 +5,8 @@
 #include <ngspice/sharedspice.h>
 #include "cpu_state.h"
 #include "util.h"
+#include "write_rom.h"
+#include "instruction.h"
 
 // cpu constants
 static const char CPU_CYCLE_LEN = 4;
@@ -17,6 +19,26 @@ static const char POWER_ON_RESET_PULSE_LEN = 7;
 static const char NGSPICE_TRAN_STEP_NS = 30;
 static const char *NGSPICE_RSHUNT = "option rshunt=1e9";
 static const char *NGSPICE_ITL1 = "option itl1=300";
+// the instance name of the control unit subcircuit in the CPU netlist
+static const char *CONTROL_UNIT_INSTANCE_NAME = "xxcu";
+// the instance name of the ROM subcircuit in the CPU netlist
+static const char *ROM_INSTANCE_NAME = "xxrom";
+
+// code to run on the CPU. computes the GCD of 12 and 36 using euclid's
+// algorithm. see 'instruction.h' for the opcode macros used
+const unsigned char PROGRAM_ROM[16] = {
+    LDROM_X(0xe),  // load 12 into x
+    LDROM_Y(0xf),  // load 36 into y
+    [2] = CMP,
+    BEQ(2),        // branch back to rom[2] if x and y are equal
+    BLT(7),        // go to rom[7] if x < y
+    SUB_X_Y,       // x = x - y
+    JMP(2),        // go to rom[2]
+    [7] = SUB_Y_X, // y = y - x
+    JMP(2),        // go to rom[2]
+    [0xe] = 12,
+    [0xf] = 36,
+};
 
 // TODO: stop-condition function
 // TODO: make emulator, dump state, compare with simulated state?? allows easily testing programs
@@ -60,6 +82,12 @@ simulate_cpu(int n_cycles)
 
     // send command to only save voltages at the specified nodes
     send_ngspice_cmd(save_cmd);
+
+    // initialize program ROM with code and data
+    write_rom(&PROGRAM_ROM, ROM_INSTANCE_NAME);
+
+    // initialize microcode in control unit
+    init_decode_rom(CONTROL_UNIT_INSTANCE_NAME);
 
     // send option commands
     send_ngspice_cmd(NGSPICE_RSHUNT);
@@ -148,7 +176,6 @@ simulate_cpu(int n_cycles)
 int
 main(void)
 {
-    // TODO: parse command-line input, run simulation
-
+    simulate_cpu(34);
     return 0;
 }

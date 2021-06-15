@@ -85,8 +85,8 @@ xx15 pc_in n046 n045 vdd 0 or
 xx7 carry_flag branch_carry vdd 0 n047 nand
 xx12 zero_flag branch_zr vdd 0 n042 nand
 xx13 n042 n047 vdd 0 n046 nand
-xx14 clk nir4 nir5 nir6 nir7 reset ~y_out add branch_zr count_enable flags_in ir_in mar_in not_out not_x not_y pc_in pc_out ram_out vdd 0 x_in y_in ~alu_out ~carry ~ir_out ~ram_in ~rom_out ~x_out branch_carry control_unit
 xx2 n021 add not_out not_x not_y nx0 nx1 nx2 nx3 nx4 nx5 nx6 nx7 ny0 ny1 ny2 ny3 ny4 ny5 ny6 ny7 n023 nd0 nd1 nd2 nd3 nd4 nd5 nd6 nd7 vdd 0 n024 ~alu_out alu
+xxcu clk nir4 nir5 nir6 nir7 reset ~y_out add branch_zr count_enable flags_in ir_in mar_in not_out not_x not_y pc_in pc_out ram_out vdd 0 x_in y_in ~alu_out ~carry ~ir_out ~ram_in ~rom_out ~x_out branch_carry control_unit
 rpc0 0 npc0 200k
 rpc1 0 npc1 200k
 rpc2 0 npc2 200k
