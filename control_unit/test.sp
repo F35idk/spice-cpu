@@ -2,7 +2,7 @@
 
 .include control_unit.inc
 
-xx1 n015 n001 n002 n003 n004 n017 n~y_out nadd nbranch_zr ncount_enable nflags_in nir_in nmar_in nnot_out nnot_x nnot_y npc_in npc_out nram_out n005 0 nx_in ny_in n~alu_out n~carry n~ir_out n~ram_in n~rom_out n~x_out nbranch_carry control_unit
+xxcu n015 n001 n002 n003 n004 n017 n~y_out nadd nbranch_zr ncount_enable nflags_in nir_in nmar_in nnot_out nnot_x nnot_y npc_in npc_out nram_out n005 0 nx_in ny_in n~alu_out n~carry n~ir_out n~ram_in n~rom_out n~x_out nbranch_carry control_unit
 r1 0 n~y_out 100k
 r2 0 ny_in 100k
 r3 0 n~x_out 100k

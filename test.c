@@ -8,10 +8,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/mman.h>
-
 // tell the functions in 'util.h' to print debug info
 #define DEBUG
 #include "util.h"
+#include "write_rom.h"
 
 static void
 init_test(
@@ -142,6 +142,9 @@ test_combinational(
 // circuit cmp file is assumed to represent time
 static void
 test_sequential(
+    // function for setting any state in the netlist before
+    // testing (such as initializing ROM)
+    void (*init_func)(void),
     const char *netlist_path,
     const char *cmp_file_path,
     const char *spice_input_labels[],
@@ -155,6 +158,10 @@ test_sequential(
     int cmp_file_pos;
 
     init_test(netlist_path, cmp_file_path, &cmp_file, &cmp_file_len);
+
+    if (init_func)
+        init_func();
+
     cmp_file_pos = 0;
 
     while ((cmp_file_pos + 1) < cmp_file_len && cmp_file[++cmp_file_pos] != '\n')
@@ -218,6 +225,12 @@ test_sequential(
     puts("");
     free(input_output_values);
     munmap(cmp_file, cmp_file_len);
+}
+
+static void
+init_control_unit_test(void)
+{
+    init_decode_rom("xxcu");
 }
 
 int
@@ -360,27 +373,27 @@ main(void)
                             // is used as the ALU negative flag
                             "nq1", "nq0", "nzr", "nq7", NULL });
 
-    test_sequential("sr_latch/test.sp",
+    test_sequential(NULL, "sr_latch/test.sp",
          "sr_latch/sr_latch.cmp",
          (const char *[]) { "vs", "vr", NULL },
          (const char *[]) { "nq", NULL });
 
-    test_sequential("d_latch/test.sp",
+    test_sequential(NULL, "d_latch/test.sp",
          "d_latch/d_latch.cmp",
          (const char *[]) { "vd", "v~e", NULL },
          (const char *[]) { "nq", NULL });
 
-    test_sequential("d_flip_flop/test.sp",
+    test_sequential(NULL, "d_flip_flop/test.sp",
          "d_flip_flop/d_flip_flop.cmp",
          (const char *[]) { "vd", "vclk", NULL },
          (const char *[]) { "nq", NULL });
 
-    test_sequential("jk_flip_flop/test.sp",
+    test_sequential(NULL, "jk_flip_flop/test.sp",
          "jk_flip_flop/jk_flip_flop.cmp",
          (const char *[]) { "vj", "vk", "vclk", NULL },
          (const char *[]) { "nq", NULL });
 
-    test_sequential("8_bit_register/test.sp",
+    test_sequential(NULL, "8_bit_register/test.sp",
          "8_bit_register/8_bit_register.cmp",
          (const char *[]) { "vd7", "vd6", "vd5",
                             "vd4", "vd3", "vd2",
@@ -404,7 +417,7 @@ main(void)
                             "nd12", "nd13", "nd14",
                             "nd15", NULL });
 
-    test_sequential("sram/test.sp", "sram/sram.cmp",
+    test_sequential(NULL, "sram/test.sp", "sram/sram.cmp",
          (const char *[]) { "va3", "va2", "va1",
                             "va0", "vd7", "vd6",
                             "vd5", "vd4", "vd3",
@@ -414,7 +427,7 @@ main(void)
                             "nd4", "nd3", "nd2",
                             "nd1", "nd0", NULL });
 
-    test_sequential("program_counter/test.sp",
+    test_sequential(NULL, "program_counter/test.sp",
          "program_counter/program_counter.cmp",
          (const char *[]) { "vd3", "vd2", "vd1",
                             "vd0", "voe", "vce",
@@ -422,12 +435,13 @@ main(void)
          (const char *[]) { "nd3", "nd2",
                             "nd1", "nd0", NULL });
 
-    test_sequential("mod_3_counter/test.sp",
+    test_sequential(NULL, "mod_3_counter/test.sp",
          "mod_3_counter/mod_3_counter.cmp",
          (const char *[]) { "v~clk", "vrst", NULL },
          (const char *[]) { "nq1", "nq0", NULL });
 
-    test_sequential("control_unit/test.sp",
+    test_sequential(init_control_unit_test,
+         "control_unit/test.sp",
          "control_unit/control_unit.cmp",
          (const char *[]) { "vclk", "vrst", "vi7",
                             "vi6", "vi5", "vi4", NULL },
@@ -441,7 +455,7 @@ main(void)
                             "n~x_out", "ny_in", "n~y_out",
                             "nbranch_carry", NULL });
 
-    test_sequential("dt_flip_flop/test.sp",
+    test_sequential(NULL, "dt_flip_flop/test.sp",
          "dt_flip_flop/dt_flip_flop.cmp",
          (const char *[]) { "vclk", "vd", "v~t", "v~ie", NULL },
          (const char *[]) { "nq", NULL });
