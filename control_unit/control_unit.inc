@@ -7,6 +7,7 @@
 .include ../nor/nor.inc
 .include ../not/not.inc
 .include ../1_to_4_buffer/1_to_4_buffer.inc
+.include ../rom/rom.inc
 
 .subckt control_unit clk i4 i5 i6 i7 rst ~y_out add branch_zr count_enable flags_in ir_in mar_in not_out not_x not_y pc_in pc_out ram_out vdd vss x_in y_in ~alu_out ~carry ~ir_out ~ram_in ~rom_out ~x_out branch_carry
 xx2 n006 i5 vdd vss n002 and
