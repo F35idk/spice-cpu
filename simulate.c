@@ -33,7 +33,10 @@ simulate_cpu(int n_cycles)
 
     char *save_cmd = "save" " v(nx7)"  " v(nx6)"  " v(nx5)"
                      " v(nx4)"  " v(nx3)"  " v(nx2)"
-                     " v(nx1)"  " v(nx0)"  " v(nd7)"
+                     " v(nx1)"  " v(nx0)" " v(ny7)"
+                     " v(ny6)"  " v(ny5)" " v(ny4)"
+                     " v(ny3)"  " v(ny2)" " v(ny1)"
+                     " v(ny0)" " v(nd7)"
                      " v(nd6)"  " v(nd5)"  " v(nd4)"
                      " v(nd3)"  " v(nd2)"  " v(nd1)"
                      " v(nd0)"  " v(nmar3)"  " v(nmar2)"
@@ -52,7 +55,8 @@ simulate_cpu(int n_cycles)
                      " v(ram_out)" " v(~rom_out)"
                      " v(x_in)" " v(~x_out)"
                      " v(y_in)" " v(~y_out)"
-                     " v(branch_carry)";
+                     " v(branch_carry)" " v(carry_flag)"
+                     " v(zero_flag)";
 
     // send command to only save voltages of the specified nodes
     send_ngspice_cmd(save_cmd);
