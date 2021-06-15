@@ -13,14 +13,14 @@
 
 * 2-bit d flip-flop used as a flags register
 .subckt 2_bit_d_flip_flop clk d0 d1 q0 q1 vdd vss ~q0 ~q1 ie rst
-XX1 N001 ~d0 q0 ~q0 vdd vss d_flip_flop
-XX2 N001 ~d1 q1 ~q1 vdd vss d_flip_flop
-XX3 clk N003 vdd vss N002 clock_gate
-XX4 N002 N001 vss vdd not
-XX6 N004 d1 vdd vss ~d1 nand
-XX7 rst N004 vss vdd not
-XX5 d0 N004 vdd vss ~d0 nand
-XX8 rst ie N003 vdd vss or
+xx1 n001 ~d0 q0 ~q0 vdd vss d_flip_flop
+xx2 n001 ~d1 q1 ~q1 vdd vss d_flip_flop
+xx3 clk n003 vdd vss n002 clock_gate
+xx4 n002 n001 vss vdd not
+xx6 n004 d1 vdd vss ~d1 nand
+xx7 rst n004 vss vdd not
+xx5 d0 n004 vdd vss ~d0 nand
+xx8 rst ie n003 vdd vss or
 .ends 2_bit_d_flip_flop
 
 * 4-bit d flip-flop used as a memory address register

@@ -58,7 +58,7 @@ simulate_cpu(int n_cycles)
                      " v(branch_carry)" " v(carry_flag)"
                      " v(zero_flag)";
 
-    // send command to only save voltages of the specified nodes
+    // send command to only save voltages at the specified nodes
     send_ngspice_cmd(save_cmd);
 
     // send option commands
@@ -73,7 +73,6 @@ simulate_cpu(int n_cycles)
     // set breakpoint at every cycle
     for (int i = POWER_ON_DELAY + POWER_ON_RESET_PULSE_LEN; i < time; i += CPU_CYCLE_LEN) {
         set_ngspice_breakpoint_in_us(i);
-        printf("%i\n", i);
     }
 
     // set breakpoint for powering on
@@ -87,9 +86,7 @@ simulate_cpu(int n_cycles)
         snprintf(tran_cmd, TRAN_CMD_LEN, "tran %ins %iu",
                  NGSPICE_TRAN_STEP_NS, time);
 
-        puts(tran_cmd);
-
-        // tell ngspice to begin transient analysis
+        // begin transient analysis
         send_ngspice_cmd(tran_cmd);
         #undef TRAN_CMD_LEN
     }
