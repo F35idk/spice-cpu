@@ -7,6 +7,7 @@
 #include "util.h"
 #include "write_rom.h"
 #include "instruction.h"
+#include "rom.h"
 
 // cpu constants
 static const char CPU_CYCLE_LEN = 4;
@@ -54,22 +55,6 @@ static const char *VOLTAGES_TO_SAVE[] = {
     "v(zero_flag)", NULL,
 };
 
-// code to run on the cpu. computes the gcd of 12 and 36 using euclid's
-// algorithm. see 'instruction.h' for the opcode macros used
-const unsigned char PROGRAM_ROM[16] = {
-    LDROM_X(0xe),  // load 12 into x
-    LDROM_Y(0xf),  // load 36 into y
-    [2] = CMP,
-    BEQ(2),        // branch back to rom[2] if x and y are equal
-    BLT(7),        // go to rom[7] if x < y
-    SUB_X_Y,       // x = x - y
-    JMP(2),        // go to rom[2]
-    [7] = SUB_Y_X, // y = y - x
-    JMP(2),        // go to rom[2]
-    [0xe] = 12,
-    [0xf] = 36,
-};
-
 // TODO: stop-condition function
 // TODO: make emulator, dump state, compare with simulated state?? allows easily testing programs
 
@@ -89,7 +74,7 @@ simulate_cpu(int n_cycles)
     }
 
     // initialize program rom with code and data
-    write_rom(&PROGRAM_ROM, ROM_INSTANCE_NAME);
+    write_rom(&ROM, ROM_INSTANCE_NAME);
 
     // initialize microcode in control unit
     init_decode_rom(CONTROL_UNIT_INSTANCE_NAME);
