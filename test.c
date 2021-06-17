@@ -240,64 +240,64 @@ main(void)
     ngSpice_Init(ngspice_output_callback, NULL, ngspice_exit_callback,
                  NULL, NULL, NULL, NULL);
 
-    test_combinational("not/test.sp",
-         "not/not.cmp",
+    test_combinational("circuits/not/test.sp",
+         "circuits/not/not.cmp",
          (const char *[]) { "vin", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("nand/test.sp",
-         "nand/nand.cmp",
+    test_combinational("circuits/nand/test.sp",
+         "circuits/nand/nand.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("nor/test.sp",
-         "nor/nor.cmp",
+    test_combinational("circuits/nor/test.sp",
+         "circuits/nor/nor.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("and/test.sp",
-         "and/and.cmp",
+    test_combinational("circuits/and/test.sp",
+         "circuits/and/and.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("or/test.sp",
-         "or/or.cmp",
+    test_combinational("circuits/or/test.sp",
+         "circuits/or/or.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("xor/test.sp",
-         "xor/xor.cmp",
+    test_combinational("circuits/xor/test.sp",
+         "circuits/xor/xor.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("mux/test.sp",
-         "mux/mux.cmp",
+    test_combinational("circuits/mux/test.sp",
+         "circuits/mux/mux.cmp",
          (const char *[]) { "va", "vb", "vsel", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("dmux/test.sp",
-         "dmux/dmux.cmp",
+    test_combinational("circuits/dmux/test.sp",
+         "circuits/dmux/dmux.cmp",
          (const char *[]) { "vin", "vsel", NULL },
          (const char *[]) { "na", "nb", NULL });
 
-    test_combinational("4_way_mux/test.sp",
-         "4_way_mux/4_way_mux.cmp",
+    test_combinational("circuits/4_way_mux/test.sp",
+         "circuits/4_way_mux/4_way_mux.cmp",
          (const char *[]) { "va", "vb", "vc", "vd",
                             "vsel0", "vsel1", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("half_adder/test.sp",
-         "half_adder/half_adder.cmp",
+    test_combinational("circuits/half_adder/test.sp",
+         "circuits/half_adder/half_adder.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nsum", "ncarry", NULL });
 
-    test_combinational("full_adder/test.sp",
-         "full_adder/full_adder.cmp",
+    test_combinational("circuits/full_adder/test.sp",
+         "circuits/full_adder/full_adder.cmp",
          (const char *[]) { "va", "vb", "vc", NULL },
          (const char *[]) { "nsum", "ncarry", NULL });
 
-    test_combinational("8_bit_adder/test.sp",
-         "8_bit_adder/8_bit_adder.cmp",
+    test_combinational("circuits/8_bit_adder/test.sp",
+         "circuits/8_bit_adder/8_bit_adder.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4",
                             "va3", "va2", "va1", "va0",
                             "vb7", "vb6", "vb5", "vb4",
