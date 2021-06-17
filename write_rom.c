@@ -53,6 +53,8 @@ write_rom(
                 send_ngspice_alter_cmd(byte_circuit_name, '5');
         }
     }
+
+    free(byte_circuit_name);
 }
 
 static void
