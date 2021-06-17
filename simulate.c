@@ -6,8 +6,6 @@
 #include "cpu_state.h"
 #include "util.h"
 #include "write_rom.h"
-#include "instruction.h"
-#include "rom.h"
 #include "simulate.h"
 
 // cpu constants
@@ -60,7 +58,7 @@ static const char *VOLTAGES_TO_SAVE[] = {
 // TODO: make emulator, dump state, compare with simulated state?? allows easily testing programs
 
 CpuState *
-simulate_cpu(int n_cycles)
+simulate_cpu(const unsigned char (*rom)[16], int n_cycles)
 {
     // initialize ngspice
     ngSpice_Init(ngspice_output_callback, NULL, ngspice_exit_callback,
@@ -75,7 +73,7 @@ simulate_cpu(int n_cycles)
     }
 
     // initialize program rom with code and data
-    write_rom(&ROM, ROM_INSTANCE_NAME);
+    write_rom(rom, ROM_INSTANCE_NAME);
 
     // initialize microcode in control unit
     init_decode_rom(CONTROL_UNIT_INSTANCE_NAME);
