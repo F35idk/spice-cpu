@@ -51,7 +51,7 @@ simulate_cpu(int n_cycles)
                  NULL, NULL, NULL, NULL);
 
     // send command to open the cpu netlist
-    send_ngspice_cmd("source cpu/test.sp");
+    send_ngspice_cmd("source cpu.sp");
 
     char *save_cmd = "save" " v(nx7)"  " v(nx6)"  " v(nx5)"
                      " v(nx4)"  " v(nx3)"  " v(nx2)"

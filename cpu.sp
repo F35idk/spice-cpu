@@ -1,15 +1,15 @@
 * cpu test circuit
 
-.include ../d_flip_flop/d_flip_flop.inc
-.include ../alu/alu.inc
-.include ../sram/sram.inc
-.include ../rom/rom.inc
-.include ../program_counter/program_counter.inc
-.include ../mux/mux.inc
-.include ../nor/nor.inc
-.include ../8_bit_register/8_bit_register.inc
-.include ../control_unit/control_unit.inc
-.include ../power_on_reset_circuit/power_on_reset_circuit.inc
+.include circuits/d_flip_flop/d_flip_flop.inc
+.include circuits/alu/alu.inc
+.include circuits/sram/sram.inc
+.include circuits/rom/rom.inc
+.include circuits/program_counter/program_counter.inc
+.include circuits/mux/mux.inc
+.include circuits/nor/nor.inc
+.include circuits/8_bit_register/8_bit_register.inc
+.include circuits/control_unit/control_unit.inc
+.include circuits/power_on_reset_circuit/power_on_reset_circuit.inc
 
 * 2-bit d flip-flop used as a flags register
 .subckt 2_bit_d_flip_flop clk d0 d1 q0 q1 vdd vss ~q0 ~q1 ie rst
@@ -39,7 +39,7 @@ xx7 clk ie vdd vss n003 clock_gate
 .ends 4_bit_d_flip_flop
 
 xx3 nmar0 nmar1 nmar2 nmar3 ram_out ~ram_in nd0 nd1 nd2 nd3 nd4 nd5 nd6 nd7 vdd 0 sram
-xx4 nmar0 nmar1 nmar2 nmar3 ~rom_out nd0 nd1 nd2 nd3 nd4 nd5 nd6 nd7 vdd 0 rom
+xxrom nmar0 nmar1 nmar2 nmar3 ~rom_out nd0 nd1 nd2 nd3 nd4 nd5 nd6 nd7 vdd 0 rom
 rd0 0 nd0 50k
 rd1 0 nd1 50k
 rd2 0 nd2 50k
@@ -97,5 +97,6 @@ rir4 0 nir4 200k
 rir5 0 nir5 200k
 rir6 0 nir6 200k
 rir7 0 nir7 200k
+rdummy 0 n023 200k
 
 .end

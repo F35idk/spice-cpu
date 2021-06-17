@@ -306,8 +306,8 @@ main(void)
                             "nsum4", "nsum3", "nsum2",
                             "nsum1", "nsum0", "ncarry", NULL });
 
-    test_combinational("8_bit_and/test.sp",
-         "8_bit_and/8_bit_and.cmp",
+    test_combinational("circuits/8_bit_and/test.sp",
+         "circuits/8_bit_and/8_bit_and.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4",
                             "va3", "va2", "va1", "va0",
                             "vb7", "vb6", "vb5", "vb4",
@@ -316,8 +316,8 @@ main(void)
                             "nout4", "nout3", "nout2",
                             "nout1", "nout0", NULL });
 
-    test_combinational("8_bit_xor/test.sp",
-         "8_bit_xor/8_bit_xor.cmp",
+    test_combinational("circuits/8_bit_xor/test.sp",
+         "circuits/8_bit_xor/8_bit_xor.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4",
                             "va3", "va2", "va1", "va0",
                             "vb7", "vb6", "vb5", "vb4",
@@ -326,8 +326,8 @@ main(void)
                             "nout4", "nout3", "nout2",
                             "nout1", "nout0", NULL });
 
-    test_combinational("8_bit_mux/test.sp",
-         "8_bit_mux/8_bit_mux.cmp",
+    test_combinational("circuits/8_bit_mux/test.sp",
+         "circuits/8_bit_mux/8_bit_mux.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4", "va3",
                             "va2", "va1", "va0", "vb7", "vb6",
                             "vb5", "vb4", "vb3", "vb2", "vb1",
@@ -336,8 +336,8 @@ main(void)
                             "nout4", "nout3", "nout2",
                             "nout1", "nout0", NULL });
 
-    test_combinational("8_bit_mux/test.sp",
-         "8_bit_mux/8_bit_mux.cmp",
+    test_combinational("circuits/8_bit_mux/test.sp",
+         "circuits/8_bit_mux/8_bit_mux.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4", "va3",
                             "va2", "va1", "va0", "vb7", "vb6",
                             "vb5", "vb4", "vb3", "vb2", "vb1",
@@ -346,22 +346,22 @@ main(void)
                             "nout4", "nout3", "nout2",
                             "nout1", "nout0", NULL });
 
-    test_combinational("8_way_or/test.sp",
-         "8_way_or/8_way_or.cmp",
+    test_combinational("circuits/8_way_or/test.sp",
+         "circuits/8_way_or/8_way_or.cmp",
          (const char *[]) { "vin7", "vin6", "vin5",
                             "vin4", "vin3", "vin2",
                             "vin1", "vin0", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("8_way_nor/test.sp",
-         "8_way_nor/8_way_nor.cmp",
+    test_combinational("circuits/8_way_nor/test.sp",
+         "circuits/8_way_nor/8_way_nor.cmp",
          (const char *[]) { "vin7", "vin6", "vin5",
                             "vin4", "vin3", "vin2",
                             "vin1", "vin0", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("alu/test.sp",
-         "alu/alu.cmp",
+    test_combinational("circuits/alu/test.sp",
+         "circuits/alu/alu.cmp",
          (const char *[]) { "vx7", "vx6", "vx5", "vx4", "vx3",
                             "vx2", "vx1", "vx0", "vy7", "vy6",
                             "vy5", "vy4", "vy3", "vy2", "vy1",
@@ -371,30 +371,30 @@ main(void)
                             "nq4", "nq3", "nq2",
                             // NOTE: 'nq7' (the 8th bit of the output)
                             // is used as the ALU negative flag
-                            "nq1", "nq0", "nzr", "nq7", NULL });
+                            "nq1", "nq0", "nzr", "nq7", "ncout", NULL });
 
-    test_sequential(NULL, "sr_latch/test.sp",
-         "sr_latch/sr_latch.cmp",
+    test_sequential(NULL, "circuits/sr_latch/test.sp",
+         "circuits/sr_latch/sr_latch.cmp",
          (const char *[]) { "vs", "vr", NULL },
          (const char *[]) { "nq", NULL });
 
-    test_sequential(NULL, "d_latch/test.sp",
-         "d_latch/d_latch.cmp",
+    test_sequential(NULL, "circuits/d_latch/test.sp",
+         "circuits/d_latch/d_latch.cmp",
          (const char *[]) { "vd", "v~e", NULL },
          (const char *[]) { "nq", NULL });
 
-    test_sequential(NULL, "d_flip_flop/test.sp",
-         "d_flip_flop/d_flip_flop.cmp",
+    test_sequential(NULL, "circuits/d_flip_flop/test.sp",
+         "circuits/d_flip_flop/d_flip_flop.cmp",
          (const char *[]) { "vd", "vclk", NULL },
          (const char *[]) { "nq", NULL });
 
-    test_sequential(NULL, "jk_flip_flop/test.sp",
-         "jk_flip_flop/jk_flip_flop.cmp",
+    test_sequential(NULL, "circuits/jk_flip_flop/test.sp",
+         "circuits/jk_flip_flop/jk_flip_flop.cmp",
          (const char *[]) { "vj", "vk", "vclk", NULL },
          (const char *[]) { "nq", NULL });
 
-    test_sequential(NULL, "8_bit_register/test.sp",
-         "8_bit_register/8_bit_register.cmp",
+    test_sequential(NULL, "circuits/8_bit_register/test.sp",
+         "circuits/8_bit_register/8_bit_register.cmp",
          (const char *[]) { "vd7", "vd6", "vd5",
                             "vd4", "vd3", "vd2",
                             "vd1", "vd0", "vclk",
@@ -406,8 +406,8 @@ main(void)
                             "nd3", "nd2", "nd1",
                             "nd0",  NULL });
 
-    test_combinational("4_to_16_decoder/test.sp",
-         "4_to_16_decoder/4_to_16_decoder.cmp",
+    test_combinational("circuits/4_to_16_decoder/test.sp",
+         "circuits/4_to_16_decoder/4_to_16_decoder.cmp",
          (const char *[]) { "va", "vb", "vc",
                             "vd", NULL },
          (const char *[]) { "nd0", "nd1", "nd2",
@@ -417,7 +417,7 @@ main(void)
                             "nd12", "nd13", "nd14",
                             "nd15", NULL });
 
-    test_sequential(NULL, "sram/test.sp", "sram/sram.cmp",
+    test_sequential(NULL, "circuits/sram/test.sp", "circuits/sram/sram.cmp",
          (const char *[]) { "va3", "va2", "va1",
                             "va0", "vd7", "vd6",
                             "vd5", "vd4", "vd3",
@@ -427,22 +427,22 @@ main(void)
                             "nd4", "nd3", "nd2",
                             "nd1", "nd0", NULL });
 
-    test_sequential(NULL, "program_counter/test.sp",
-         "program_counter/program_counter.cmp",
+    test_sequential(NULL, "circuits/program_counter/test.sp",
+         "circuits/program_counter/program_counter.cmp",
          (const char *[]) { "vd3", "vd2", "vd1",
                             "vd0", "voe", "vce",
                             "vie", "vrst", "vclk", NULL },
          (const char *[]) { "nd3", "nd2",
                             "nd1", "nd0", NULL });
 
-    test_sequential(NULL, "mod_3_counter/test.sp",
-         "mod_3_counter/mod_3_counter.cmp",
+    test_sequential(NULL, "circuits/mod_3_counter/test.sp",
+         "circuits/mod_3_counter/mod_3_counter.cmp",
          (const char *[]) { "v~clk", "vrst", NULL },
          (const char *[]) { "nq1", "nq0", NULL });
 
     test_sequential(init_control_unit_test,
-         "control_unit/test.sp",
-         "control_unit/control_unit.cmp",
+         "circuits/control_unit/test.sp",
+         "circuits/control_unit/control_unit.cmp",
          (const char *[]) { "vclk", "vrst", "vi7",
                             "vi6", "vi5", "vi4", NULL },
          (const char *[]) { "n~alu_out", "n~carry",
@@ -455,8 +455,8 @@ main(void)
                             "n~x_out", "ny_in", "n~y_out",
                             "nbranch_carry", NULL });
 
-    test_sequential(NULL, "dt_flip_flop/test.sp",
-         "dt_flip_flop/dt_flip_flop.cmp",
+    test_sequential(NULL, "circuits/dt_flip_flop/test.sp",
+         "circuits/dt_flip_flop/dt_flip_flop.cmp",
          (const char *[]) { "vclk", "vd", "v~t", "v~ie", NULL },
          (const char *[]) { "nq", NULL });
 

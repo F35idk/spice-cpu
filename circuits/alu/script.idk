@@ -1,0 +1,18 @@
+#!/usr/bin/zsh
+
+file="test.sp"
+device_prefix=$1
+node_prefix=$2
+line_to_begin_at=1
+
+for ((j = 10, i = 0; j >= 3; j--, i++)); do
+    node_to_be_renamed=$(exec rg -N "$device_prefix$j (n[0-9]*).*" $file -r '$1' | tr -d '\n')
+
+    if [ "$node_to_be_renamed" = "n" -o "$node_to_be_renamed" = "" ]; then
+        echo "no match"
+        continue;
+    fi
+
+    echo "$line_to_begin_at,\$s/$node_to_be_renamed/$node_prefix$i/g"
+    exec sed -i "$line_to_begin_at,\$s/$node_to_be_renamed/$node_prefix$i/g" $file &
+done

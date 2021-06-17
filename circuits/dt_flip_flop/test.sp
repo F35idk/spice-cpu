@@ -11,5 +11,5 @@ v~t n003 0 0
 v~ie n005 0 0
 r2 n006 0 100k
 
-.tran 1ns 60u
+.tran 1ns 70u
 .end
