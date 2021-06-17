@@ -8,6 +8,7 @@
 #include "write_rom.h"
 #include "instruction.h"
 #include "rom.h"
+#include "simulate.h"
 
 // cpu constants
 static const char CPU_CYCLE_LEN = 4;
@@ -58,7 +59,7 @@ static const char *VOLTAGES_TO_SAVE[] = {
 // TODO: stop-condition function
 // TODO: make emulator, dump state, compare with simulated state?? allows easily testing programs
 
-static CpuState *
+CpuState *
 simulate_cpu(int n_cycles)
 {
     // initialize ngspice
@@ -161,11 +162,4 @@ simulate_cpu(int n_cycles)
 
     cpu_states[n_cycles].is_last = true;
     return cpu_states;
-}
-
-int
-main(void)
-{
-    simulate_cpu(34);
-    return 0;
 }
