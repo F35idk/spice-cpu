@@ -117,10 +117,6 @@ simulate_cpu(int n_cycles)
     CpuState *cpu_states = calloc(1, (n_cycles + 1) * sizeof(CpuState));
     for (int i = 0; i <= n_cycles; i++) {
         CpuState *state = &cpu_states[i];
-        printf("~rom_out: %f\n", get_ngspice_vector_voltage("~rom_out"));
-        printf("x_in: %f\n", get_ngspice_vector_voltage("x_in"));
-        printf("pc_in: %f\n", get_ngspice_vector_voltage("pc_in"));
-        printf("pc_out: %f\n", get_ngspice_vector_voltage("pc_out"));
 
         for (int j = 0; j < 8; j++) {
             if (get_ngspice_vector_voltage_fmt("nx%i", j) > 4.0)
@@ -148,9 +144,14 @@ simulate_cpu(int n_cycles)
             state->carry = true;
 
         state->current_cycle = i;
-        // FIXME: cycle became 49 on last iter???????
 
+        #ifdef DEBUG
+        printf("~rom_out: %f\n", get_ngspice_vector_voltage("~rom_out"));
+        printf("x_in: %f\n", get_ngspice_vector_voltage("x_in"));
+        printf("pc_in: %f\n", get_ngspice_vector_voltage("pc_in"));
+        printf("pc_out: %f\n", get_ngspice_vector_voltage("pc_out"));
         cpu_state_print(state);
+        #endif
 
         // don't send resume cmd on last iteration (simulation is done)
         if (i != n_cycles)
