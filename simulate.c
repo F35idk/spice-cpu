@@ -16,6 +16,7 @@ static const char POWER_ON_DELAY = 2;
 static const char POWER_ON_RESET_PULSE_LEN = 7;
 
 // simulation constants
+static const char *NETLIST_PATH = "cpu.sp";
 static const char NGSPICE_TRAN_STEP_NS = 30;
 static const char *NGSPICE_RSHUNT = "option rshunt=1e9";
 static const char *NGSPICE_ITL1 = "option itl1=300";
@@ -23,8 +24,37 @@ static const char *NGSPICE_ITL1 = "option itl1=300";
 static const char *CONTROL_UNIT_INSTANCE_NAME = "xxcu";
 // the instance name of the ROM subcircuit in the CPU netlist
 static const char *ROM_INSTANCE_NAME = "xxrom";
+// voltages at important nodes in the netlist
+static const char *VOLTAGES_TO_SAVE[] = {
+    "v(nx7)", "v(nx6)", "v(nx5)",
+    "v(nx4)", "v(nx3)", "v(nx2)",
+    "v(nx1)", "v(nx0)", "v(ny7)",
+    "v(ny6)", "v(ny5)", "v(ny4)",
+    "v(ny3)", "v(ny2)", "v(ny1)",
+    "v(ny0)", "v(nd7)", "v(nd6)",
+    "v(nd5)", "v(nd4)", "v(nd3)",
+    "v(nd2)", "v(nd1)", "v(nd0)",
+    "v(nmar3)", "v(nmar2)", "v(nmar1)",
+    "v(nmar0)", "v(nir7)", "v(nir6)",
+    "v(nir5)", "v(nir4)", "v(nir3)",
+    "v(nir2)", "v(nir1)", "v(nir0)",
+    "v(npc3)", "v(npc2)", "v(npc1)",
+    "v(npc0)", "v(clk)", "v(reset)",
+    "v(vdd)", "v(~alu_out)", "v(~carry)",
+    "v(add)", "v(branch_zr)",
+    "v(count_enable)", "v(flags_in)",
+    "v(ir_in)", "v(~ir_out)",
+    "v(mar_in)", "v(not_out)",
+    "v(not_x)", "v(not_y)", "v(pc_in)",
+    "v(pc_out)", "v(~ram_in)",
+    "v(ram_out)", "v(~rom_out)",
+    "v(x_in)", "v(~x_out)",
+    "v(y_in)", "v(~y_out)",
+    "v(branch_carry)", "v(carry_flag)",
+    "v(zero_flag)", NULL,
+};
 
-// code to run on the CPU. computes the GCD of 12 and 36 using euclid's
+// code to run on the cpu. computes the gcd of 12 and 36 using euclid's
 // algorithm. see 'instruction.h' for the opcode macros used
 const unsigned char PROGRAM_ROM[16] = {
     LDROM_X(0xe),  // load 12 into x
@@ -51,39 +81,14 @@ simulate_cpu(int n_cycles)
                  NULL, NULL, NULL, NULL);
 
     // send command to open the cpu netlist
-    send_ngspice_cmd("source cpu.sp");
+    send_ngspice_cmd_va("source %s", NETLIST_PATH);
 
-    char *save_cmd = "save" " v(nx7)"  " v(nx6)"  " v(nx5)"
-                     " v(nx4)"  " v(nx3)"  " v(nx2)"
-                     " v(nx1)"  " v(nx0)" " v(ny7)"
-                     " v(ny6)"  " v(ny5)" " v(ny4)"
-                     " v(ny3)"  " v(ny2)" " v(ny1)"
-                     " v(ny0)" " v(nd7)"
-                     " v(nd6)"  " v(nd5)"  " v(nd4)"
-                     " v(nd3)"  " v(nd2)"  " v(nd1)"
-                     " v(nd0)"  " v(nmar3)"  " v(nmar2)"
-                     " v(nmar1)"  " v(nmar0)"  " v(nir7)"
-                     " v(nir6)"  " v(nir5)"  " v(nir4)"
-                     " v(nir3)"  " v(nir2)"  " v(nir1)"
-                     " v(nir0)"  " v(npc3)"  " v(npc2)"
-                     " v(npc1)"  " v(npc0)" " v(clk)"
-                     " v(reset)" " v(vdd)" " v(~alu_out)"
-                     " v(~carry)" " v(add)" " v(branch_zr)"
-                     " v(count_enable)" " v(flags_in)"
-                     " v(ir_in)" " v(~ir_out)"
-                     " v(mar_in)" " v(not_out)"
-                     " v(not_x)" " v(not_y)" " v(pc_in)"
-                     " v(pc_out)" " v(~ram_in)"
-                     " v(ram_out)" " v(~rom_out)"
-                     " v(x_in)" " v(~x_out)"
-                     " v(y_in)" " v(~y_out)"
-                     " v(branch_carry)" " v(carry_flag)"
-                     " v(zero_flag)";
+    // send commands to only save voltages at the specified nodes
+    for (int i = 0; VOLTAGES_TO_SAVE[i]; i++) {
+        send_ngspice_cmd_va("save %s", VOLTAGES_TO_SAVE[i]);
+    }
 
-    // send command to only save voltages at the specified nodes
-    send_ngspice_cmd(save_cmd);
-
-    // initialize program ROM with code and data
+    // initialize program rom with code and data
     write_rom(&PROGRAM_ROM, ROM_INSTANCE_NAME);
 
     // initialize microcode in control unit
