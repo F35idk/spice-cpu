@@ -96,6 +96,27 @@ send_ngspice_cmd(char *cmd)
     }
 }
 
+void
+send_ngspice_cmd_va(const char *cmd_fmt, ...)
+{
+    va_list va;
+    int cmd_len;
+    char *cmd;
+
+    va_start(va, cmd_fmt);
+    cmd_len = vsnprintf(NULL, 0, cmd_fmt, va) + 1;
+    va_end(va);
+
+    va_start(va, cmd_fmt);
+    cmd = calloc(1, cmd_len);
+    vsnprintf(cmd, cmd_len, cmd_fmt, va);
+    va_end(va);
+
+    send_ngspice_cmd(cmd);
+    free(cmd);
+}
+
+
 // sets a breakpoint in the ngpsice simulation at t = 'time_us' microseconds
 void
 set_ngspice_breakpoint_in_us(int time_us)
@@ -129,3 +150,4 @@ send_ngspice_alter_cmd(
     send_ngspice_cmd(alter_cmd);
     free(alter_cmd);
 }
+

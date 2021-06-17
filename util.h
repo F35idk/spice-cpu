@@ -35,6 +35,9 @@ float get_ngspice_vector_voltage_fmt(const char *fmt_vector_name, int idx);
 
 void send_ngspice_cmd(char *cmd);
 
+void send_ngspice_cmd_va(const char *cmd_fmt, ...)
+__attribute__ ((format (printf, 1, 2)));
+
 // sets a breakpoint in the ngpsice simulation at t = 'time_us' microseconds
 void set_ngspice_breakpoint_in_us(int time_us);
 
