@@ -48,9 +48,9 @@ write_rom(
                      "v.%s.xxbyte%i.v%i", rom_instance_name, i, j);
 
             if ((*rom)[i] & (1 << j))
-                send_ngspice_alter_cmd(byte_circuit_name, '0'); // data is inverted before being output from ROM
-            else
                 send_ngspice_alter_cmd(byte_circuit_name, '5');
+            else
+                send_ngspice_alter_cmd(byte_circuit_name, '0');
         }
     }
 

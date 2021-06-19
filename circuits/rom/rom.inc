@@ -1,43 +1,32 @@
 * 16-byte rom subcircuit
 
-.include ../transmission_gate/transmission_gate.inc
 .include ../not/not.inc
 .include ../buffer/buffer.inc
 .include ../nand/nand.inc
 .include ../1_to_4_not/1_to_4_not.inc
 .include ../4_to_16_decoder/4_to_16_decoder.inc
+.include ../tri_state_buffer/tri_state_buffer.inc
 
-* an 8-bit rom cell. each voltage source (v0-v7) represents an inverted bit
+* an 8-bit rom cell. each voltage source (v0-v7) represents a bit
 .subckt 8_bit_rom_cell ~e q0 q1 q2 q3 q4 q5 q6 q7 vdd vss
-xx1 e0 n003 ~e0 q0 vdd vss transmission_gate
-xx2 e0 n007 ~e0 q1 vdd vss transmission_gate
-xx3 e0 n011 ~e0 q2 vdd vss transmission_gate
-xx4 e0 n015 ~e0 q3 vdd vss transmission_gate
-xx5 e1 n005 ~e1 q4 vdd vss transmission_gate
-xx6 e1 n009 ~e1 q5 vdd vss transmission_gate
-xx7 e1 n013 ~e1 q6 vdd vss transmission_gate
-xx8 e1 n017 ~e1 q7 vdd vss transmission_gate
-xx9 ~e n001 vss vdd not
-xx12 n001 e0 vss vdd buffer
-xx10 n001 ~e0 vss vdd not
-xx11 n001 ~e1 vss vdd not
-xx13 n001 e1 vss vdd buffer
-v0 n002 vss 0
-v1 n006 vss 0
-v2 n010 vss 0
-v3 n014 vss 0
-v4 n004 vss 0
-v5 n008 vss 0
-v6 n012 vss 0
-v7 n016 vss 0
-xx14 n002 n003 vss vdd not
-xx15 n006 n007 vss vdd not
-xx16 n010 n011 vss vdd not
-xx17 n014 n015 vss vdd not
-xx18 n004 n005 vss vdd not
-xx19 n008 n009 vss vdd not
-xx20 n012 n013 vss vdd not
-xx21 n016 n017 vss vdd not
+v0 n001 vss 0
+v1 n003 vss 0
+v2 n005 vss 0
+v3 n007 vss 0
+v4 n002 vss 0
+v5 n004 vss 0
+v6 n006 vss 0
+v7 n008 vss 0
+xx14 n001 q0 vss vdd e0 tri_state_buffer_shunt
+xx1 n003 q1 vss vdd e0 tri_state_buffer_shunt
+xx2 n005 q2 vss vdd e0 tri_state_buffer_shunt
+xx3 n007 q3 vss vdd e0 tri_state_buffer_shunt
+xx4 n002 q4 vss vdd e1 tri_state_buffer_shunt
+xx5 n004 q5 vss vdd e1 tri_state_buffer_shunt
+xx6 n006 q6 vss vdd e1 tri_state_buffer_shunt
+xx7 n008 q7 vss vdd e1 tri_state_buffer_shunt
+xx8 ~e e0 vss vdd not
+xx9 ~e e1 vss vdd not
 .ends 8_bit_rom_cell
 
 .subckt rom a0 a1 a2 a3 ~cs d0 d1 d2 d3 d4 d5 d6 d7 vdd vss
