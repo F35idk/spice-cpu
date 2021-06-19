@@ -91,8 +91,9 @@ emulate_cpu(const unsigned char (*rom)[16], int n_cycles)
                 #endif
                 cpu.x &= cpu.y;
                 cpu.zero = (cpu.x == 0);
-                // AND clobbers the carry flag
-                cpu.carry = 0;
+                unsigned char dummy;
+                // set the carry flag as if an ADC was performed
+                cpu.carry = __builtin_add_overflow((unsigned char) cpu.x, cpu.y, &dummy);
                 break;
             }
             case 0b10110000: {
