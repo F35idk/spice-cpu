@@ -460,5 +460,66 @@ main(void)
          (const char *[]) { "vclk", "vd", "v~t", "v~ie", NULL },
          (const char *[]) { "nq", NULL });
 
+    // test_sequential(NULL, "circuits/cpu_without_cu/test.sp",
+    //      "circuits/cpu_without_cu/cpu_without_cu.cmp",
+    //      (const char *[]) { "vclk", "vreset",
+    //                         "v~alu_out", "v~carry",
+    //                         "vadd", "vbranch_zr",
+    //                         "vcount_enable", "vflags_in",
+    //                         "vir_in", "v~ir_out",
+    //                         "vmar_in", "vnot_out",
+    //                         "vnot_x", "vnot_y", "vpc_in",
+    //                         "vpc_out", "v~ram_in",
+    //                         "vram_out", "v~rom_out",
+    //                         "vx_in", "v~x_out",
+    //                         "vy_in", "v~y_out",
+    //                         "vbranch_carry", NULL },
+    //      (const char *[]) { "nx7", "nx6", "nx5",
+    //                         "nx4", "nx3", "nx2",
+    //                         "nx1", "nx0", "nd7",
+    //                         "nd6", "nd5", "nd4",
+    //                         "nd3", "nd2", "nd1",
+    //                         "nd0", "nmar3", "nmar2",
+    //                         "nmar1", "nmar0", "nir7",
+    //                         "nir6", "nir5", "nir4",
+    //                         "nir3", "nir2", "nir1",
+    //                         "nir0", "npc3", "npc2",
+    //                         "npc1", "npc0", NULL });
+
+    // test_sequential(NULL, "cpu.sp", "circuits/cpu/cpu.cmp",
+    //      (const char *[]) { "vsource", "vclk", NULL },
+    //      (const char *[]) { "nx7", "nx6", "nx5",
+    //                         "nx4", "nx3", "nx2",
+    //                         "nx1", "nx0", "nd7",
+    //                         "nd6", "nd5", "nd4",
+    //                         "nd3", "nd2", "nd1",
+    //                         "nd0", "nmar3", "nmar2",
+    //                         "nmar1", "nmar0", "nir7",
+    //                         "nir6", "nir5", "nir4",
+    //                         "nir3", "nir2", "nir1",
+    //                         "nir0", "npc3", "npc2",
+    //                         "npc1", "npc0", NULL });
+
+    // char *write_cmd = "write out.raw"
+    //                   " nx7"  " nx6"  " nx5"
+    //                   " nx4"  " nx3"  " nx2"
+    //                   " nx1"  " nx0"  " nd7"
+    //                   " nd6"  " nd5"  " nd4"
+    //                   " nd3"  " nd2"  " nd1"
+    //                   " nd0"  " nmar3"  " nmar2"
+    //                   " nmar1"  " nmar0"  " nir7"
+    //                   " nir6"  " nir5"  " nir4"
+    //                   " nir3"  " nir2"  " nir1"
+    //                   " nir0"  " npc3"  " npc2"
+    //                   " npc1"  " npc0" " clk"
+    //                   " reset" " vdd";
+
+
+    // int error = ngSpice_Command(write_cmd);
+    // if (error) {
+    //     puts("error when writing to output .raw file");
+    //     exit(1);
+    // }
+
     return 0;
 }
