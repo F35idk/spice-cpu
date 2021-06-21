@@ -9,7 +9,43 @@
 #include "rom.h"
 
 int
-main(void)
+main(int argc, char *argv[])
 {
-    simulate_cpu(&ROM, 34, NULL, true);
+    int n_cycles = 0;
+    char *output_raw_file = NULL;
+    bool emulate = false;
+
+    if (argc < 2) {
+        puts("error: too few arguments");
+        exit(1);
+    }
+
+    for (int i = 1; i < argc; i++) {
+        if (!strcmp("-n", argv[i]) || !strcmp("--cycles", argv[i])) {
+            i++;
+            n_cycles = strtol(argv[i], NULL, 10);
+            if (!n_cycles) {
+                puts("error: invalid cycle count");
+                exit(1);
+            }
+        }
+        else if (!strcmp("-o", argv[i]) || !strcmp("--output", argv[i])) {
+            i++;
+            output_raw_file = argv[i];
+        }
+        else if (!strcmp("-e", argv[i]) || !strcmp("--emulate", argv[i])) {
+            emulate = true;
+        }
+        else {
+            printf("error: invalid argument: %s\n", argv[i]);
+            exit(1);
+        }
+    }
+
+    if (emulate)
+        emulate_cpu(&ROM, n_cycles, true);
+    else
+        simulate_cpu(&ROM, n_cycles, output_raw_file, true);
+
+    return 0;
 }
