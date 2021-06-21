@@ -54,11 +54,12 @@ static const char *VOLTAGES_TO_SAVE[] = {
     "v(zero_flag)", NULL,
 };
 
-// TODO: stop-condition function
-// TODO: make emulator, dump state, compare with simulated state?? allows easily testing programs
-
 CpuState *
-simulate_cpu(const unsigned char (*rom)[16], int n_cycles)
+simulate_cpu(
+    const unsigned char (*rom)[16],
+    int n_cycles,
+    bool print_state
+)
 {
     // initialize ngspice
     ngSpice_Init(ngspice_output_callback, NULL, ngspice_exit_callback,
@@ -112,6 +113,9 @@ simulate_cpu(const unsigned char (*rom)[16], int n_cycles)
     send_ngspice_alter_cmd("vsource", '5');
     send_ngspice_cmd("resume");
 
+    if (print_state)
+        cpu_state_print_column_header();
+
     CpuState *cpu_states = calloc(1, (n_cycles + 1) * sizeof(CpuState));
     for (int i = 0; i <= n_cycles; i++) {
         CpuState *state = &cpu_states[i];
@@ -143,13 +147,8 @@ simulate_cpu(const unsigned char (*rom)[16], int n_cycles)
 
         state->current_cycle = i;
 
-        #ifdef DEBUG
-        printf("~rom_out: %f\n", get_ngspice_vector_voltage("~rom_out"));
-        printf("x_in: %f\n", get_ngspice_vector_voltage("x_in"));
-        printf("pc_in: %f\n", get_ngspice_vector_voltage("pc_in"));
-        printf("pc_out: %f\n", get_ngspice_vector_voltage("pc_out"));
-        cpu_state_print(state);
-        #endif
+        if (print_state)
+            cpu_state_print_columns(state);
 
         // don't send resume cmd on last iteration (simulation is done)
         if (i != n_cycles)

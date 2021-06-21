@@ -1,7 +1,6 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include <assert.h>
 #include <ngspice/sharedspice.h>
 #include "util.h"
 #include "cpu_state.h"
@@ -12,6 +11,5 @@
 int
 main(void)
 {
-    simulate_cpu(34);
-    return 0;
+    simulate_cpu(&ROM, 34, true);
 }
