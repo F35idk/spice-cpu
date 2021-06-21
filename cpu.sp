@@ -1,4 +1,4 @@
-* cpu test circuit
+* cpu circuit
 
 .include circuits/d_flip_flop/d_flip_flop.inc
 .include circuits/alu/alu.inc
@@ -97,6 +97,5 @@ rir4 0 nir4 200k
 rir5 0 nir5 200k
 rir6 0 nir6 200k
 rir7 0 nir7 200k
-rdummy 0 n023 200k
 
 .end

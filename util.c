@@ -59,7 +59,7 @@ get_ngspice_vector_voltage(const char *vector_name)
     assert(info);
 
     if (!info->v_length) {
-        printf("error: output vector '%s' has length zero - check stderr\n",
+        fprintf(stderr, "error: output vector '%s' has length zero\n",
                info->v_name);
         exit(1);
     }
@@ -90,7 +90,7 @@ send_ngspice_cmd(char *cmd)
 {
     int error = ngSpice_Command(cmd);
     if (error) {
-        printf("error when sending command: '%s' - check stderr\n", cmd);
+        fprintf(stderr, "error when sending command: '%s'\n", cmd);
         // NOTE: this path 'leaks' cmd if cmd was heap-allocated
         exit(1);
     }

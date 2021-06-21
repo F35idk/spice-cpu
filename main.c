@@ -16,7 +16,7 @@ main(int argc, char *argv[])
     bool emulate = false;
 
     if (argc < 2) {
-        puts("error: too few arguments");
+        fputs("error: too few arguments\n", stderr);
         exit(1);
     }
 
@@ -25,7 +25,7 @@ main(int argc, char *argv[])
             i++;
             n_cycles = strtol(argv[i], NULL, 10);
             if (!n_cycles) {
-                puts("error: invalid cycle count");
+                fputs("error: invalid cycle count", stderr);
                 exit(1);
             }
         }
@@ -37,7 +37,7 @@ main(int argc, char *argv[])
             emulate = true;
         }
         else {
-            printf("error: invalid argument: %s\n", argv[i]);
+            fprintf(stderr, "error: invalid argument: %s\n", argv[i]);
             exit(1);
         }
     }

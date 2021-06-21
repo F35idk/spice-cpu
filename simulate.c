@@ -118,10 +118,12 @@ simulate_cpu(
         cpu_state_print_column_header();
 
     CpuState *cpu_states = calloc(1, (n_cycles + 1) * sizeof(CpuState));
+    // run simulation cycle-by-cycle and log cpu state into 'cpu_states'
     for (int i = 0; i <= n_cycles; i++) {
         CpuState *state = &cpu_states[i];
 
         for (int j = 0; j < 8; j++) {
+            // voltage > 4.0V = logic high
             if (get_ngspice_vector_voltage_fmt("nx%i", j) > 4.0)
                 state->x |= (1 << j);
 

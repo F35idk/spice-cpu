@@ -18,14 +18,14 @@ emulate_cpu(
 )
 {
     if (n_cycles % 3 != 0) {
-        puts("error: cycle count must be a multiple of 3 when emulating");
+        fputs("error: cycle count must be a multiple of 3 when emulating\n", stderr);
         exit(1);
     }
 
     int n_instructions = n_cycles / 3;
     CpuState *cpu_states = calloc(1, n_instructions * sizeof(CpuState));
     CpuState cpu = {0};
-    char ram[16] = {0};
+    unsigned char ram[16] = {0};
 
     if (print_state)
         cpu_state_print_column_header();
@@ -110,7 +110,8 @@ emulate_cpu(
                 break;
             }
             default: {
-                printf("invalid opcode: 0x%x\n", cpu.ir & 0xf0);
+                // TODO: emulate invalid opcode execution
+                fprintf(stderr, "invalid opcode: 0x%x\n", cpu.ir & 0xf0);
                 exit(1);
                 break;
             }
