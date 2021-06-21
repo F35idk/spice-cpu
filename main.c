@@ -11,5 +11,5 @@
 int
 main(void)
 {
-    simulate_cpu(&ROM, 34, true);
+    simulate_cpu(&ROM, 34, NULL, true);
 }

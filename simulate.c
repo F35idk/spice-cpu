@@ -58,6 +58,7 @@ CpuState *
 simulate_cpu(
     const unsigned char (*rom)[16],
     int n_cycles,
+    const char *output_raw_file,
     bool print_state
 )
 {
@@ -155,8 +156,9 @@ simulate_cpu(
             send_ngspice_cmd("resume");
     }
 
-    char *write_cmd = "write out.raw";
-    send_ngspice_cmd(write_cmd);
+    if (output_raw_file) {
+        send_ngspice_cmd_va("write %s", output_raw_file);
+    }
 
     cpu_states[n_cycles].is_last = true;
     return cpu_states;
