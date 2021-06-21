@@ -17,7 +17,11 @@ emulate_cpu(
     bool print_state
 )
 {
-    assert(n_cycles % 3 == 0);
+    if (n_cycles % 3 != 0) {
+        puts("error: cycle count must be a multiple of 3 when emulating");
+        exit(1);
+    }
+
     int n_instructions = n_cycles / 3;
     CpuState *cpu_states = calloc(1, n_instructions * sizeof(CpuState));
     CpuState cpu = {0};
