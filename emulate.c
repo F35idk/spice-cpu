@@ -11,7 +11,11 @@
 // instruction-accurate emulation for testing the simulation against
 
 CpuState *
-emulate_cpu(const unsigned char (*rom)[16], int n_cycles)
+emulate_cpu(
+    const unsigned char (*rom)[16],
+    int n_cycles,
+    bool print_state
+)
 {
     assert(n_cycles % 3 == 0);
     int n_instructions = n_cycles / 3;
@@ -19,15 +23,14 @@ emulate_cpu(const unsigned char (*rom)[16], int n_cycles)
     CpuState cpu = {0};
     char ram[16] = {0};
 
+    if (print_state)
+        cpu_state_print_column_header();
+
     for (int i = 0; i < n_instructions; i++) {
         cpu.ir = (*rom)[cpu.pc];
         cpu.current_cycle = 3 + i * 3;
         cpu.mar = cpu.ir & 0xf;
         cpu.pc += 1;
-
-        #ifdef DEBUG
-        printf("%s\n", instruction_to_string(cpu.ir));
-        #endif
 
         switch (cpu.ir & 0xf0) {
             case 0b00100000: {
@@ -108,6 +111,9 @@ emulate_cpu(const unsigned char (*rom)[16], int n_cycles)
                 break;
             }
         }
+
+        if (print_state)
+            cpu_state_print_columns(&cpu);
 
         cpu_states[i] = cpu;
     }

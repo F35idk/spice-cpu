@@ -13,7 +13,7 @@
 static void
 test_cpu(const unsigned char (*rom)[16], int n_cycles)
 {
-    CpuState *emulated_cpu_states = emulate_cpu(rom, n_cycles);
+    CpuState *emulated_cpu_states = emulate_cpu(rom, n_cycles, false);
     CpuState *simulated_cpu_states = simulate_cpu(rom, n_cycles, NULL, false);
 
     for (int i = 0; i < n_cycles / 3; i += 1) {
