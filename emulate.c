@@ -37,6 +37,20 @@ emulate_cpu(
         cpu.pc += 1;
 
         switch (cpu.ir & 0xf0) {
+            case 0b00000000: {
+                fprintf(stderr, "warning: invalid opcode: 0x%x\n", cpu.ir & 0xf0);
+                // perform cycle 1 of opcode fetch
+                cpu.mar = cpu.pc;
+                break;
+            }
+            case 0b00010000: {
+                fprintf(stderr, "warning: invalid opcode: 0x%x\n", cpu.ir & 0xf0);
+                // perform cycle 2 of opcode fetch
+                cpu.ir = (*rom)[cpu.mar];
+                cpu.mar = (*rom)[cpu.mar];
+                cpu.pc += 1;
+                break;
+            }
             case 0b00100000: {
                 ram[cpu.ir & 0xf] = cpu.x;
                 break;
@@ -107,12 +121,6 @@ emulate_cpu(
             }
             case 0b11110000: {
                 cpu.pc = cpu.ir & 0xf;
-                break;
-            }
-            default: {
-                // TODO: emulate invalid opcode execution
-                fprintf(stderr, "invalid opcode: 0x%x\n", cpu.ir & 0xf0);
-                exit(1);
                 break;
             }
         }

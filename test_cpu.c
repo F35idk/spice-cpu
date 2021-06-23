@@ -61,8 +61,15 @@ main(void)
         [0xf] = 0xcd,
     };
 
+    // invalid opcode testing
+    const unsigned char rom_3[16] = {
+        [0] = OPC_FETCH_1,
+        [1] = OPC_FETCH_2,
+    };
+
     test_cpu(&rom_1, 33);
     test_cpu(&rom_2, 24);
+    test_cpu(&rom_3, 6);
 
     return 0;
 }

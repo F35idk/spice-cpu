@@ -30,6 +30,10 @@ instruction_to_string(unsigned char instruction)
     static char output[13];
 
     switch (instruction & 0xf0) {
+        case 0b00000000:
+        case 0b00010000:
+            strcpy(output, "OPCODE FETCH");
+            break;
         case 0b00100000:
             sprintf(output, "STRAM X, %#x", instruction & 0xf);
             break;
