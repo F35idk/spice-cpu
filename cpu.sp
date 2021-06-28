@@ -1,15 +1,15 @@
 * cpu circuit
 
-.include circuits/d_flip_flop/d_flip_flop.inc
-.include circuits/alu/alu.inc
-.include circuits/sram/sram.inc
-.include circuits/rom/rom.inc
-.include circuits/program_counter/program_counter.inc
-.include circuits/mux/mux.inc
-.include circuits/nor/nor.inc
-.include circuits/8_bit_register/8_bit_register.inc
-.include circuits/control_unit/control_unit.inc
-.include circuits/power_on_reset_circuit/power_on_reset_circuit.inc
+.include circuits/ngspice/d_flip_flop/d_flip_flop.inc
+.include circuits/ngspice/alu/alu.inc
+.include circuits/ngspice/sram/sram.inc
+.include circuits/ngspice/rom/rom.inc
+.include circuits/ngspice/program_counter/program_counter.inc
+.include circuits/ngspice/mux/mux.inc
+.include circuits/ngspice/nor/nor.inc
+.include circuits/ngspice/8_bit_register/8_bit_register.inc
+.include circuits/ngspice/control_unit/control_unit.inc
+.include circuits/ngspice/power_on_reset_circuit/power_on_reset_circuit.inc
 
 * 2-bit d flip-flop used as a flags register
 .subckt 2_bit_d_flip_flop clk d0 d1 q0 q1 vdd vss ~q0 ~q1 ie rst
