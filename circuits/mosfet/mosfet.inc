@@ -1,5 +1,3 @@
-.model 1n4148 d(is=2.52n rs=.568 n=1.752 cjo=4p m=.4 tt=20n iave=200m vpk=75 mfg=onsemi)
-
 * 4-terminal pmos subcircuit
 .subckt pmos_4t d g s b
 c1 d n001 200f

@@ -1,6 +1,6 @@
 * not gate subcircuit
 
-.include ../device_models.inc
+.include ../mosfet/mosfet.inc
 
 .subckt not in out vss vdd
 r1 vdd out 1k

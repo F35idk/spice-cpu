@@ -1,6 +1,6 @@
 * 3-way nand subcircuit
 
-.include ../device_models.inc
+.include ../mosfet/mosfet.inc
 
 .subckt 3_way_nand a b vdd vss out c
 r1 vdd out 1k

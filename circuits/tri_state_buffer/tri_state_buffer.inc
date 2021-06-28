@@ -1,6 +1,6 @@
 * tri-state buffer subcircuit
 
-.include ../device_models.inc
+.include ../mosfet/mosfet.inc
 .include ../nand/nand.inc
 .include ../nor/nor.inc
 .include ../not/not.inc

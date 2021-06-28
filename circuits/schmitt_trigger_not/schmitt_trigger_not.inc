@@ -1,6 +1,6 @@
 * schmitt trigger inverter circuit. positive and negative going threshold should be ~3.5V
 
-.include ../device_models.inc
+.include ../mosfet/mosfet.inc
 
 .subckt schmitt_trigger_not in out vss vdd
 r1 vdd out 1k

@@ -1,6 +1,6 @@
 * 4-way nor subcircuit
 
-.include ../device_models.inc
+.include ../mosfet/mosfet.inc
 
 .subckt 4_way_nor a b c d out vdd vss
 r1 vdd out 1k
