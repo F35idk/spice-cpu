@@ -48,19 +48,11 @@ rd4 0 nd4 50k
 rd5 0 nd5 50k
 rd6 0 nd6 50k
 rd7 0 nd7 50k
-xx8 clk n023 n024 carry_flag zero_flag vdd 0 n022 n034 flags_in reset 2_bit_d_flip_flop
-xx10 ~carry n022 vdd 0 n021 nor
-r1 0 n034 100k
+xx8 clk n003 n004 carry_flag zero_flag vdd 0 n002 n005 flags_in reset 2_bit_d_flip_flop
+xx10 ~carry n002 vdd 0 n001 nor
+r1 0 n005 100k
 vclk clk 0 pulse(0 5 2u 0 0 2u 4u)
 vsource vdd 0 0
-rx0 0 nx0 200k
-rx1 0 nx1 200k
-rx2 0 nx2 200k
-rx3 0 nx3 200k
-rx4 0 nx4 200k
-rx5 0 nx5 200k
-rx6 0 nx6 200k
-rx7 0 nx7 200k
 r3 nd0 0 50k
 r4 nd6 0 50k
 r5 nd7 0 50k
@@ -70,32 +62,24 @@ r8 nd3 0 50k
 r9 nd2 0 50k
 r10 nd1 0 50k
 xx6 clk nd0 nd1 nd2 nd3 mar_in nmar0 nmar1 nmar2 nmar3 vdd 0 4_bit_d_flip_flop
-rmar0 0 nmar0 200k
-rmar1 0 nmar1 200k
-rmar2 0 nmar2 200k
-rmar3 0 nmar3 200k
 xx5 clk x_in ~x_out nd0 nd1 nd2 nd3 nd4 nd5 nd6 nd7 nx0 nx1 nx2 nx3 nx4 nx5 nx6 nx7 vdd 0 8_bit_register
 xx9 clk y_in ~y_out nd0 nd1 nd2 nd3 nd4 nd5 nd6 nd7 ny0 ny1 ny2 ny3 ny4 ny5 ny6 ny7 vdd 0 8_bit_register
 xx11 clk ir_in ~ir_out nd0 nd1 nd2 nd3 nd4 nd5 nd6 nd7 nir0 nir1 nir2 nir3 nir4 nir5 nir6 nir7 vdd 0 8_bit_register
-rir1 0 nir1 200k
-rir2 0 nir2 200k
-rir3 0 nir3 200k
-rir0 0 nir0 200k
-xx15 pc_in n046 n045 vdd 0 or
-xx7 carry_flag branch_carry vdd 0 n047 nand
-xx12 zero_flag branch_zr vdd 0 n042 nand
-xx13 n042 n047 vdd 0 n046 nand
-xx2 n021 add not_out not_x not_y nx0 nx1 nx2 nx3 nx4 nx5 nx6 nx7 ny0 ny1 ny2 ny3 ny4 ny5 ny6 ny7 n023 nd0 nd1 nd2 nd3 nd4 nd5 nd6 nd7 vdd 0 n024 ~alu_out alu
+rir1 nir1 0 200k
+rir2 nir2 0 200k
+rir3 nir3 0 200k
+rir0 nir0 0 200k
+xx15 pc_in n008 n007 vdd 0 or
+xx7 carry_flag branch_carry vdd 0 n009 nand
+xx12 zero_flag branch_zr vdd 0 n006 nand
+xx13 n006 n009 vdd 0 n008 nand
+xx2 n001 add not_out not_x not_y nx0 nx1 nx2 nx3 nx4 nx5 nx6 nx7 ny0 ny1 ny2 ny3 ny4 ny5 ny6 ny7 n003 nd0 nd1 nd2 nd3 nd4 nd5 nd6 nd7 vdd 0 n004 ~alu_out alu
 xxcu clk nir4 nir5 nir6 nir7 reset ~y_out add branch_zr count_enable flags_in ir_in mar_in not_out not_x not_y pc_in pc_out ram_out vdd 0 x_in y_in ~alu_out ~carry ~ir_out ~ram_in ~rom_out ~x_out branch_carry control_unit
-rpc0 0 npc0 200k
-rpc1 0 npc1 200k
-rpc2 0 npc2 200k
-rpc3 0 npc3 200k
+rpc0 npc0 0 200k
+rpc1 npc1 0 200k
+rpc2 npc2 0 200k
+rpc3 npc3 0 200k
 xx16 reset vdd 0 power_on_reset_circuit
-xx1 clk pc_out count_enable n045 nd0 nd1 nd2 nd3 vdd 0 reset npc0 npc1 npc2 npc3 program_counter
-rir4 0 nir4 200k
-rir5 0 nir5 200k
-rir6 0 nir6 200k
-rir7 0 nir7 200k
+xx1 clk pc_out count_enable n007 nd0 nd1 nd2 nd3 vdd 0 reset npc0 npc1 npc2 npc3 program_counter
 
 .end
