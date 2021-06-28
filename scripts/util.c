@@ -150,4 +150,3 @@ send_ngspice_alter_cmd(
     send_ngspice_cmd(alter_cmd);
     free(alter_cmd);
 }
-

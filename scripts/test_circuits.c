@@ -240,64 +240,64 @@ main(void)
     ngSpice_Init(ngspice_output_callback, NULL, ngspice_exit_callback,
                  NULL, NULL, NULL, NULL);
 
-    test_combinational("circuits/not/test.sp",
-         "circuits/not/not.cmp",
+    test_combinational("circuits/ngspice/not/test.sp",
+         "circuits/ngspice/not/not.cmp",
          (const char *[]) { "vin", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("circuits/nand/test.sp",
-         "circuits/nand/nand.cmp",
+    test_combinational("circuits/ngspice/nand/test.sp",
+         "circuits/ngspice/nand/nand.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("circuits/nor/test.sp",
-         "circuits/nor/nor.cmp",
+    test_combinational("circuits/ngspice/nor/test.sp",
+         "circuits/ngspice/nor/nor.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("circuits/and/test.sp",
-         "circuits/and/and.cmp",
+    test_combinational("circuits/ngspice/and/test.sp",
+         "circuits/ngspice/and/and.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("circuits/or/test.sp",
-         "circuits/or/or.cmp",
+    test_combinational("circuits/ngspice/or/test.sp",
+         "circuits/ngspice/or/or.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("circuits/xor/test.sp",
-         "circuits/xor/xor.cmp",
+    test_combinational("circuits/ngspice/xor/test.sp",
+         "circuits/ngspice/xor/xor.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("circuits/mux/test.sp",
-         "circuits/mux/mux.cmp",
+    test_combinational("circuits/ngspice/mux/test.sp",
+         "circuits/ngspice/mux/mux.cmp",
          (const char *[]) { "va", "vb", "vsel", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("circuits/dmux/test.sp",
-         "circuits/dmux/dmux.cmp",
+    test_combinational("circuits/ngspice/dmux/test.sp",
+         "circuits/ngspice/dmux/dmux.cmp",
          (const char *[]) { "vin", "vsel", NULL },
          (const char *[]) { "na", "nb", NULL });
 
-    test_combinational("circuits/4_way_mux/test.sp",
-         "circuits/4_way_mux/4_way_mux.cmp",
+    test_combinational("circuits/ngspice/4_way_mux/test.sp",
+         "circuits/ngspice/4_way_mux/4_way_mux.cmp",
          (const char *[]) { "va", "vb", "vc", "vd",
                             "vsel0", "vsel1", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("circuits/half_adder/test.sp",
-         "circuits/half_adder/half_adder.cmp",
+    test_combinational("circuits/ngspice/half_adder/test.sp",
+         "circuits/ngspice/half_adder/half_adder.cmp",
          (const char *[]) { "va", "vb", NULL },
          (const char *[]) { "nsum", "ncarry", NULL });
 
-    test_combinational("circuits/full_adder/test.sp",
-         "circuits/full_adder/full_adder.cmp",
+    test_combinational("circuits/ngspice/full_adder/test.sp",
+         "circuits/ngspice/full_adder/full_adder.cmp",
          (const char *[]) { "va", "vb", "vc", NULL },
          (const char *[]) { "nsum", "ncarry", NULL });
 
-    test_combinational("circuits/8_bit_adder/test.sp",
-         "circuits/8_bit_adder/8_bit_adder.cmp",
+    test_combinational("circuits/ngspice/8_bit_adder/test.sp",
+         "circuits/ngspice/8_bit_adder/8_bit_adder.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4",
                             "va3", "va2", "va1", "va0",
                             "vb7", "vb6", "vb5", "vb4",
@@ -306,8 +306,8 @@ main(void)
                             "nsum4", "nsum3", "nsum2",
                             "nsum1", "nsum0", "ncarry", NULL });
 
-    test_combinational("circuits/8_bit_and/test.sp",
-         "circuits/8_bit_and/8_bit_and.cmp",
+    test_combinational("circuits/ngspice/8_bit_and/test.sp",
+         "circuits/ngspice/8_bit_and/8_bit_and.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4",
                             "va3", "va2", "va1", "va0",
                             "vb7", "vb6", "vb5", "vb4",
@@ -316,8 +316,8 @@ main(void)
                             "nout4", "nout3", "nout2",
                             "nout1", "nout0", NULL });
 
-    test_combinational("circuits/8_bit_xor/test.sp",
-         "circuits/8_bit_xor/8_bit_xor.cmp",
+    test_combinational("circuits/ngspice/8_bit_xor/test.sp",
+         "circuits/ngspice/8_bit_xor/8_bit_xor.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4",
                             "va3", "va2", "va1", "va0",
                             "vb7", "vb6", "vb5", "vb4",
@@ -326,8 +326,8 @@ main(void)
                             "nout4", "nout3", "nout2",
                             "nout1", "nout0", NULL });
 
-    test_combinational("circuits/8_bit_mux/test.sp",
-         "circuits/8_bit_mux/8_bit_mux.cmp",
+    test_combinational("circuits/ngspice/8_bit_mux/test.sp",
+         "circuits/ngspice/8_bit_mux/8_bit_mux.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4", "va3",
                             "va2", "va1", "va0", "vb7", "vb6",
                             "vb5", "vb4", "vb3", "vb2", "vb1",
@@ -336,8 +336,8 @@ main(void)
                             "nout4", "nout3", "nout2",
                             "nout1", "nout0", NULL });
 
-    test_combinational("circuits/8_bit_mux/test.sp",
-         "circuits/8_bit_mux/8_bit_mux.cmp",
+    test_combinational("circuits/ngspice/8_bit_mux/test.sp",
+         "circuits/ngspice/8_bit_mux/8_bit_mux.cmp",
          (const char *[]) { "va7", "va6", "va5", "va4", "va3",
                             "va2", "va1", "va0", "vb7", "vb6",
                             "vb5", "vb4", "vb3", "vb2", "vb1",
@@ -346,22 +346,22 @@ main(void)
                             "nout4", "nout3", "nout2",
                             "nout1", "nout0", NULL });
 
-    test_combinational("circuits/8_way_or/test.sp",
-         "circuits/8_way_or/8_way_or.cmp",
+    test_combinational("circuits/ngspice/8_way_or/test.sp",
+         "circuits/ngspice/8_way_or/8_way_or.cmp",
          (const char *[]) { "vin7", "vin6", "vin5",
                             "vin4", "vin3", "vin2",
                             "vin1", "vin0", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("circuits/8_way_nor/test.sp",
-         "circuits/8_way_nor/8_way_nor.cmp",
+    test_combinational("circuits/ngspice/8_way_nor/test.sp",
+         "circuits/ngspice/8_way_nor/8_way_nor.cmp",
          (const char *[]) { "vin7", "vin6", "vin5",
                             "vin4", "vin3", "vin2",
                             "vin1", "vin0", NULL },
          (const char *[]) { "nout", NULL });
 
-    test_combinational("circuits/alu/test.sp",
-         "circuits/alu/alu.cmp",
+    test_combinational("circuits/ngspice/alu/test.sp",
+         "circuits/ngspice/alu/alu.cmp",
          (const char *[]) { "vx7", "vx6", "vx5", "vx4", "vx3",
                             "vx2", "vx1", "vx0", "vy7", "vy6",
                             "vy5", "vy4", "vy3", "vy2", "vy1",
@@ -373,28 +373,28 @@ main(void)
                             // is used as the ALU negative flag
                             "nq1", "nq0", "nzr", "nq7", "ncout", NULL });
 
-    test_sequential(NULL, "circuits/sr_latch/test.sp",
-         "circuits/sr_latch/sr_latch.cmp",
+    test_sequential(NULL, "circuits/ngspice/sr_latch/test.sp",
+         "circuits/ngspice/sr_latch/sr_latch.cmp",
          (const char *[]) { "vs", "vr", NULL },
          (const char *[]) { "nq", NULL });
 
-    test_sequential(NULL, "circuits/d_latch/test.sp",
-         "circuits/d_latch/d_latch.cmp",
+    test_sequential(NULL, "circuits/ngspice/d_latch/test.sp",
+         "circuits/ngspice/d_latch/d_latch.cmp",
          (const char *[]) { "vd", "v~e", NULL },
          (const char *[]) { "nq", NULL });
 
-    test_sequential(NULL, "circuits/d_flip_flop/test.sp",
-         "circuits/d_flip_flop/d_flip_flop.cmp",
+    test_sequential(NULL, "circuits/ngspice/d_flip_flop/test.sp",
+         "circuits/ngspice/d_flip_flop/d_flip_flop.cmp",
          (const char *[]) { "vd", "vclk", NULL },
          (const char *[]) { "nq", NULL });
 
-    test_sequential(NULL, "circuits/jk_flip_flop/test.sp",
-         "circuits/jk_flip_flop/jk_flip_flop.cmp",
+    test_sequential(NULL, "circuits/ngspice/jk_flip_flop/test.sp",
+         "circuits/ngspice/jk_flip_flop/jk_flip_flop.cmp",
          (const char *[]) { "vj", "vk", "vclk", NULL },
          (const char *[]) { "nq", NULL });
 
-    test_sequential(NULL, "circuits/8_bit_register/test.sp",
-         "circuits/8_bit_register/8_bit_register.cmp",
+    test_sequential(NULL, "circuits/ngspice/8_bit_register/test.sp",
+         "circuits/ngspice/8_bit_register/8_bit_register.cmp",
          (const char *[]) { "vd7", "vd6", "vd5",
                             "vd4", "vd3", "vd2",
                             "vd1", "vd0", "vclk",
@@ -406,8 +406,8 @@ main(void)
                             "nd3", "nd2", "nd1",
                             "nd0",  NULL });
 
-    test_combinational("circuits/4_to_16_decoder/test.sp",
-         "circuits/4_to_16_decoder/4_to_16_decoder.cmp",
+    test_combinational("circuits/ngspice/4_to_16_decoder/test.sp",
+         "circuits/ngspice/4_to_16_decoder/4_to_16_decoder.cmp",
          (const char *[]) { "va", "vb", "vc",
                             "vd", NULL },
          (const char *[]) { "nd0", "nd1", "nd2",
@@ -417,7 +417,7 @@ main(void)
                             "nd12", "nd13", "nd14",
                             "nd15", NULL });
 
-    test_sequential(NULL, "circuits/sram/test.sp", "circuits/sram/sram.cmp",
+    test_sequential(NULL, "circuits/ngspice/sram/test.sp", "circuits/ngspice/sram/sram.cmp",
          (const char *[]) { "va3", "va2", "va1",
                             "va0", "vd7", "vd6",
                             "vd5", "vd4", "vd3",
@@ -427,22 +427,22 @@ main(void)
                             "nd4", "nd3", "nd2",
                             "nd1", "nd0", NULL });
 
-    test_sequential(NULL, "circuits/program_counter/test.sp",
-         "circuits/program_counter/program_counter.cmp",
+    test_sequential(NULL, "circuits/ngspice/program_counter/test.sp",
+         "circuits/ngspice/program_counter/program_counter.cmp",
          (const char *[]) { "vd3", "vd2", "vd1",
                             "vd0", "voe", "vce",
                             "vie", "vrst", "vclk", NULL },
          (const char *[]) { "nd3", "nd2",
                             "nd1", "nd0", NULL });
 
-    test_sequential(NULL, "circuits/mod_3_counter/test.sp",
-         "circuits/mod_3_counter/mod_3_counter.cmp",
+    test_sequential(NULL, "circuits/ngspice/mod_3_counter/test.sp",
+         "circuits/ngspice/mod_3_counter/mod_3_counter.cmp",
          (const char *[]) { "v~clk", "vrst", NULL },
          (const char *[]) { "nq1", "nq0", NULL });
 
     test_sequential(init_control_unit_test,
-         "circuits/control_unit/test.sp",
-         "circuits/control_unit/control_unit.cmp",
+         "circuits/ngspice/control_unit/test.sp",
+         "circuits/ngspice/control_unit/control_unit.cmp",
          (const char *[]) { "vclk", "vrst", "vi7",
                             "vi6", "vi5", "vi4", NULL },
          (const char *[]) { "n~alu_out", "n~carry",
@@ -455,71 +455,10 @@ main(void)
                             "n~x_out", "ny_in", "n~y_out",
                             "nbranch_carry", NULL });
 
-    test_sequential(NULL, "circuits/dt_flip_flop/test.sp",
-         "circuits/dt_flip_flop/dt_flip_flop.cmp",
+    test_sequential(NULL, "circuits/ngspice/dt_flip_flop/test.sp",
+         "circuits/ngspice/dt_flip_flop/dt_flip_flop.cmp",
          (const char *[]) { "vclk", "vd", "v~t", "v~ie", NULL },
          (const char *[]) { "nq", NULL });
-
-    // test_sequential(NULL, "circuits/cpu_without_cu/test.sp",
-    //      "circuits/cpu_without_cu/cpu_without_cu.cmp",
-    //      (const char *[]) { "vclk", "vreset",
-    //                         "v~alu_out", "v~carry",
-    //                         "vadd", "vbranch_zr",
-    //                         "vcount_enable", "vflags_in",
-    //                         "vir_in", "v~ir_out",
-    //                         "vmar_in", "vnot_out",
-    //                         "vnot_x", "vnot_y", "vpc_in",
-    //                         "vpc_out", "v~ram_in",
-    //                         "vram_out", "v~rom_out",
-    //                         "vx_in", "v~x_out",
-    //                         "vy_in", "v~y_out",
-    //                         "vbranch_carry", NULL },
-    //      (const char *[]) { "nx7", "nx6", "nx5",
-    //                         "nx4", "nx3", "nx2",
-    //                         "nx1", "nx0", "nd7",
-    //                         "nd6", "nd5", "nd4",
-    //                         "nd3", "nd2", "nd1",
-    //                         "nd0", "nmar3", "nmar2",
-    //                         "nmar1", "nmar0", "nir7",
-    //                         "nir6", "nir5", "nir4",
-    //                         "nir3", "nir2", "nir1",
-    //                         "nir0", "npc3", "npc2",
-    //                         "npc1", "npc0", NULL });
-
-    // test_sequential(NULL, "cpu.sp", "circuits/cpu/cpu.cmp",
-    //      (const char *[]) { "vsource", "vclk", NULL },
-    //      (const char *[]) { "nx7", "nx6", "nx5",
-    //                         "nx4", "nx3", "nx2",
-    //                         "nx1", "nx0", "nd7",
-    //                         "nd6", "nd5", "nd4",
-    //                         "nd3", "nd2", "nd1",
-    //                         "nd0", "nmar3", "nmar2",
-    //                         "nmar1", "nmar0", "nir7",
-    //                         "nir6", "nir5", "nir4",
-    //                         "nir3", "nir2", "nir1",
-    //                         "nir0", "npc3", "npc2",
-    //                         "npc1", "npc0", NULL });
-
-    // char *write_cmd = "write out.raw"
-    //                   " nx7"  " nx6"  " nx5"
-    //                   " nx4"  " nx3"  " nx2"
-    //                   " nx1"  " nx0"  " nd7"
-    //                   " nd6"  " nd5"  " nd4"
-    //                   " nd3"  " nd2"  " nd1"
-    //                   " nd0"  " nmar3"  " nmar2"
-    //                   " nmar1"  " nmar0"  " nir7"
-    //                   " nir6"  " nir5"  " nir4"
-    //                   " nir3"  " nir2"  " nir1"
-    //                   " nir0"  " npc3"  " npc2"
-    //                   " npc1"  " npc0" " clk"
-    //                   " reset" " vdd";
-
-
-    // int error = ngSpice_Command(write_cmd);
-    // if (error) {
-    //     puts("error when writing to output .raw file");
-    //     exit(1);
-    // }
 
     return 0;
 }
